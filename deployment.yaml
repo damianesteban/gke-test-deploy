@@ -1,38 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: hello
-labels:
-  app: hello
+  name: hello
 spec:
-strategy:
-  type: RollingUpdate
-template:
-  metadata:
-    labels:
+  replicas: 2
+  selector:
+    matchLabels:
       app: hello
-      tier: hello
-  spec:
-    containers:
-    - name: hello
-      image: damianesteban/jenk-test:latest
-      imagePullPolicy: Always
-      ports:
-      - containerPort: 5000
-        name: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+        - name: hello
+          image: damianesteban/jenk-test:latest
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-name: hello
-labels:
-  app: hello
+  name: comics-server
 spec:
-ports:
-  - port: 5000
-    targetPort: 5000
-selector:
-  app: hello
-  tier: hello
-type: LoadBalancer
+  selector:
+    app: comics-server
+  ports:
+    - port: 80
+      targetPort: 5000
+  type: LoadBalancer
