@@ -1,0 +1,7 @@
+{
+  "name": "test-deploy-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Damian Esteban",
+  "license": "MIT"
+}
