@@ -27,16 +27,17 @@ pipeline {
                             myapp.push("${env.BUILD_ID}")
                     }
                 }
-
-                script {
+            }
+        }
+        stage('Upload build to Jfrog') {
+            steps {
                   rtUpload(
                   buildName: "jenk-test-development-${env.BUILD_ID}",
                   buildNumber: "${env.BUILD_NUMBER}",
                   serverId: 'jfrog'
                 )
-              }  
             }
-        }        
+        }
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/jenk-test:latest/jenk-test:${env.BUILD_ID}/g' deployment.yaml"
