@@ -38,6 +38,15 @@ pipeline {
                     serverId: 'jfrog'
                   )
                 }
+                script {
+                  rtPublishBuildInfo (
+                      serverId: 'jfrog',
+                      // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
+                      buildName: "jenk-test-development-${env.BUILD_ID}",
+                      buildNumber: "${env.BUILD_NUMBER}",
+                      // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
+                    )
+                }
             }
         }
         stage('Deploy to GKE') {
