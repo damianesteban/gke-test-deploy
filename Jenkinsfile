@@ -5,7 +5,7 @@ pipeline {
         CLUSTER_NAME = 'silly-cluster'
         LOCATION = 'us-east1-d'
         CREDENTIALS_ID = 'gke'
-        ENVIRONMENT = ${APP_ENV}
+        ENVIRONMENT = "${APP_ENV}"
     }
     stages {
         stage("Checkout code") {
