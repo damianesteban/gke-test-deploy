@@ -15,14 +15,14 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("damianesteban/jenk-test:${env.BUILD_ID}")
+                    myapp = docker.build("bhc.jfrog.io/docker-development/jenk-test:${env.BUILD_ID}")
                 }
             }
         }
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                    docker.withRegistry('https://bhc.jfrog.io/docker-development/', 'jfrog') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }

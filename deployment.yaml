@@ -14,11 +14,10 @@ spec:
     spec:
       containers:
         - name: hello
-          image: damianesteban/jenk-test:latest
+          image: bhc.frog.io/docker-development/jenk-test:latest
           ports:
             - containerPort: 5000
           imagePullPolicy: Always
-
 ---
 apiVersion: v1
 kind: Service
