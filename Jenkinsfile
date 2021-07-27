@@ -30,7 +30,7 @@ pipeline {
                 rtUpload(
                   buildName: "jenk-test-development-${env.BUILD_ID}",
                   buildNumber: "${env.BUILD_NUMBER}",
-                  serverId: "${env.jfrog}"
+                  serverId: 'jfrog'
                 )
             }
         }        
