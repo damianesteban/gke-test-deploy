@@ -31,11 +31,13 @@ pipeline {
         }
         stage('Upload build to Jfrog') {
             steps {
-                  rtUpload(
-                  buildName: "jenk-test-development-${env.BUILD_ID}",
-                  buildNumber: "${env.BUILD_NUMBER}",
-                  serverId: 'jfrog'
-                )
+                script {
+                    rtUpload(
+                    buildName: "jenk-test-development-${env.BUILD_ID}",
+                    buildNumber: "${env.BUILD_NUMBER}",
+                    serverId: 'jfrog'
+                  )
+                }
             }
         }
         stage('Deploy to GKE') {
