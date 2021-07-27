@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Damian Esteban",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
   }
