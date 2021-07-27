@@ -27,11 +27,14 @@ pipeline {
                             myapp.push("${env.BUILD_ID}")
                     }
                 }
-                rtUpload(
+
+                script {
+                  rtUpload(
                   buildName: "jenk-test-development-${env.BUILD_ID}",
                   buildNumber: "${env.BUILD_NUMBER}",
                   serverId: 'jfrog'
                 )
+              }  
             }
         }        
         stage('Deploy to GKE') {
