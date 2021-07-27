@@ -49,6 +49,27 @@ pipeline {
                 }
             }
         }
+
+        stage('Add interactive promotion') {
+            steps {
+                rtAddInteractivePromotion (
+                    //Mandatory parameter
+                    serverId: 'jfrog',
+
+                    //Optional parameters
+                    targetRepo: 'https://bhc.jfrog.io/docker-staging/',
+                    displayName: 'Promote me please',
+                    buildName: "jenk-test-development-${env.BUILD_ID}",
+                    buildNumber: "${env.BUILD_NUMBER}",
+                    comment: 'this is the promotion comment',
+                    sourceRepo: 'https://bhc.jfrog.io/docker-development/',
+                    status: 'Released',
+                    includeDependencies: true,
+                    failFast: true,
+                    copy: true
+                )
+            }
+        }
         stage('Deploy to GKE') {
             steps{
                 sh "sed -i 's/jenk-test:latest/jenk-test:${env.BUILD_ID}/g' deployment.yaml"
