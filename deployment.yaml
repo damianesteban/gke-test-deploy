@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: comics-server
+  name: hello
 spec:
   selector:
-    app: comics-server
+    app: hello
   ports:
     - port: 80
       targetPort: 5000
