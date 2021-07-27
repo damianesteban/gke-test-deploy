@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 3000;
 
 // App
 const app = express();
+
+app.use('/web', 'public');
+
 app.get('/', function (req, res) {
   res.send('Hello world\n');
 });
