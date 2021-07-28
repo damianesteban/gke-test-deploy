@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: webapp
-          image: bhc.jfrog.io/docker-development/webapp:latest
+          image: bhc.jfrog.io/docker/webapp:latest
           ports:
             - containerPort: 5000
           imagePullPolicy: Always

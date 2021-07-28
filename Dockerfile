@@ -7,7 +7,7 @@ COPY . /app
 # The application's directory will be the working directory
 WORKDIR /app
 
-# Install Node.js dependencies defined in '/app/packages.json'
+# Install Node.js dependencies defined in '/app/package.json'
 RUN yarn
 
 FROM mhart/alpine-node:14
