@@ -16,7 +16,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("bhc.jfrog.io/docker-development/jenk-test:${ENVIRONMENT}.${env.BUILD_ID}")
+                    myapp = docker.build("bhc.jfrog.io/docker-development/webapp:${ENVIRONMENT}.${env.BUILD_ID}")
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     rtUpload(
-                    buildName: "jenk-test-${ENVIRONMENT}.${env.BUILD_ID}",
+                    buildName: "webapp-${ENVIRONMENT}.${env.BUILD_ID}",
                     buildNumber: "${env.BUILD_NUMBER}",
                     serverId: 'jfrog'
                   )
@@ -43,7 +43,7 @@ pipeline {
                   rtPublishBuildInfo (
                       serverId: 'jfrog',
                       // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
-                      buildName: "jenk-test-${ENVIRONMENT}.${env.BUILD_ID}",
+                      buildName: "webapp-${ENVIRONMENT}.${env.BUILD_ID}",
                       buildNumber: "${env.BUILD_NUMBER}",
                       // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
                     )
@@ -60,7 +60,7 @@ pipeline {
                     //Optional parameters
                     targetRepo: 'https://bhc.jfrog.io/docker-staging/',
                     displayName: 'Promote me please',
-                    buildName: "jenk-test-${ENVIRONMENT}.${env.BUILD_ID}",
+                    buildName: "webapp-${ENVIRONMENT}.${env.BUILD_ID}",
                     buildNumber: "${env.BUILD_NUMBER}",
                     comment: 'this is the promotion comment',
                     sourceRepo: 'https://bhc.jfrog.io/docker-development/',
@@ -73,7 +73,7 @@ pipeline {
         }
         stage('Deploy to GKE') {
             steps{
-                sh "sed -i 's/jenk-test:latest/jenk-test:${ENVIRONMENT}.${env.BUILD_ID}/g' deployment.yaml"
+                sh "sed -i 's/webapp:latest/webapp:${ENVIRONMENT}.${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
+  name: webapp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hello
+      app: webapp
   template:
     metadata:
       labels:
-        app: hello
+        app: webapp
     spec:
       containers:
-        - name: hello
-          image: bhc.frog.io/docker-development/jenk-test:latest
+        - name: webapp
+          image: bhc.frog.io/docker-development/webapp:latest
           ports:
             - containerPort: 5000
           imagePullPolicy: Always
@@ -22,10 +22,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello
+  name: webapp
 spec:
   selector:
-    app: hello
+    app: webapp
   ports:
     - port: 80
       targetPort: 5000
