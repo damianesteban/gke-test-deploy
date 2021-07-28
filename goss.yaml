@@ -1,7 +1,7 @@
-
 http:
-  http://localhost:5000:
+  http://localhost:5000/web:
     status: 200
+    allow-insecure: false
+    no-follow-redirects: false
     timeout: 5000
-    body:
-    - hello world
+    body: []
