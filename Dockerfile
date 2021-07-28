@@ -8,7 +8,7 @@ COPY . /app
 WORKDIR /app
 
 # Install Node.js dependencies defined in '/app/packages.json'
-RUN npm install
+RUN yarn
 
 FROM mhart/alpine-node:14
 ENV NODE_ENV="production"
