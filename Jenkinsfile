@@ -1,3 +1,5 @@
+library('jenkins-devops-libs')
+
 pipeline {
     agent any
     environment {
