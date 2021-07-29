@@ -16,6 +16,7 @@ pipeline {
                 checkout scm
             }
         }
+
         stage("Build image") {
             steps {
                 script {
@@ -23,6 +24,7 @@ pipeline {
                 }
             }
         }
+
         stage("Push image") {
             steps {
                 script {
@@ -33,6 +35,7 @@ pipeline {
                 }
             }
         }
+
         stage('Upload build to Jfrog') {
             steps {
                 script {
@@ -72,6 +75,15 @@ pipeline {
                     failFast: true,
                     copy: true
                 )
+            }
+            success {
+                def attachments = [
+                    [
+                        text: 'I find your lack of faith disturbing!',
+                        fallback: 'Hey, Vader seems to be mad at you.',
+                        color: '#ff0000'
+                    ]
+                ]
             }
         }
     }    
