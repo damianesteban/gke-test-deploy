@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 // App
 const app = express();
 
+
 app.use('/web', express.static('public'))
 
 app.get('/', function (req, res) {
