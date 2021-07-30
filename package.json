@@ -5,14 +5,17 @@
   "author": "Damian Esteban",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "commit": "git-cz",
+    "release": "standard-version"
   },
   "dependencies": {
     "express": "^4.17.1",
     "semantic-release": "^17.4.4"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
+    "cz-conventional-changelog": "3.3.0",
+    "standard-version": "^9.3.1"
   },
   "config": {
     "commitizen": {
