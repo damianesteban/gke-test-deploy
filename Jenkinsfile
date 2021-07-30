@@ -8,7 +8,9 @@ pipeline {
         LOCATION = 'us-east1-d'
         CREDENTIALS_ID = 'gke'
         ENVIRONMENT = 'development'
+        // Script to get the most recent git commit hash (short hash)
         shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        // ! TODO: Add script to get application version from package.json + application name.
     }
     stages {
         stage("Checkout code") {
