@@ -1,4 +1,4 @@
-library('jenkins-devops-libs')
+// library('jenkins-devops-libs')
 
 pipeline {
     agent any
