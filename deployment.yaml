@@ -15,9 +15,11 @@ spec:
       containers:
         - name: webapp
           image: bhc.jfrog.io/docker/webapp:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
-          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: docker-creds 
 ---
 apiVersion: v1
 kind: Service
