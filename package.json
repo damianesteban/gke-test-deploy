@@ -1,25 +1,35 @@
 {
   "name": "test-deploy-app",
-  "version": "1.1.0",
+  "version": "0.0.0-development",
   "main": "index.js",
   "author": "Damian Esteban",
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
     "commit": "git-cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "semantic-release": "semantic-release",
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.17.1",
     "semantic-release": "^17.4.4"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "cz-conventional-changelog": "3.3.0",
+    "jest": "^27.0.6",
+    "semantic-release": "^17.4.4",
     "standard-version": "^9.3.1"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/damianesteban/gke-test-deploy.git"
   }
 }
