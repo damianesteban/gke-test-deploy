@@ -7,6 +7,7 @@ COPY . /app
 # The application's directory will be the working directory
 WORKDIR /app
 
+RUN yarn set version berry
 # Install Node.js dependencies defined in '/app/package.json'
 RUN yarn
 
