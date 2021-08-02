@@ -11,7 +11,7 @@ COPY . /app
 
 RUN yarn set version berry
 # Install Node.js dependencies defined in '/app/package.json'
-RUN yarn --pure-lockfile --non-interactive
+RUN yarn
 
 FROM mhart/alpine-node:14
 ENV NODE_ENV="production"
