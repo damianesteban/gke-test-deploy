@@ -24,7 +24,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
+                    myapp = docker.build("docker-staging-local/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
             steps {
                 rtDockerPush(
                     serverId: 'artifactory-server',
-                    image: "webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                    image: "docker-staging-local/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     targetRepo: 'docker-staging-local',
                     // Attach custom properties to the published artifacts:
                     properties: 'project-name=webapp;status=stable',
