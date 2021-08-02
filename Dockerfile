@@ -2,14 +2,16 @@ FROM mhart/alpine-node:14 as builder
 ENV NODE_ENV="production"
 
 # Copy app's source code to the /app directory
+WORKDIR /app
+
+COPY package.json yarn.lock .yarnrc.yaml ./
 COPY . /app
 
 # The application's directory will be the working directory
-WORKDIR /app
 
 RUN yarn set version berry
 # Install Node.js dependencies defined in '/app/package.json'
-RUN yarn
+RUN yarn --pure-lockfile --non-interactive
 
 FROM mhart/alpine-node:14
 ENV NODE_ENV="production"
