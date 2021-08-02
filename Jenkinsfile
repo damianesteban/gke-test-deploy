@@ -33,7 +33,7 @@ pipeline {
             steps {
                 rtDockerPush(
                     serverId: 'artifactory-server',
-                    image: "https://bhc.jfrog.io/docker/${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                    image: "bhc.jfrog.io/docker/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     targetRepo: 'docker-staging-local',
                     // Attach custom properties to the published artifacts:
                     properties: 'project-name=webapp;status=stable',
