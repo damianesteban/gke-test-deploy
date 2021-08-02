@@ -10,6 +10,8 @@ pipeline {
         ENVIRONMENT = 'development'
         // Script to get the most recent git commit hash (short hash)
         shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
+        SERVICE_NAME = 'patient-service'
         // ! TODO: Add script to get application version from package.json + application name.
     }
     stages {
@@ -22,7 +24,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("bhc.jfrog.io/docker/webapp:${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
+                    myapp = docker.build("bhc.jfrog.io/docker/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
                 }
             }
         }
@@ -32,7 +34,7 @@ pipeline {
                 script {
                     docker.withRegistry('https://bhc.jfrog.io/docker/', 'artifactory-creds') {
                             myapp.push("latest")
-                            myapp.push("${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
+                            myapp.push("${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
                     }
                 }
             }
@@ -42,7 +44,7 @@ pipeline {
             steps {
                 script {
                     rtUpload(
-                    buildName: "webapp-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                    buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
                     serverId: 'artifactory-server'
                   )
@@ -51,7 +53,7 @@ pipeline {
                   rtPublishBuildInfo (
                       serverId: 'artifactory-server',
                       // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
-                      buildName: "webapp-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                      buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                       buildNumber: "${env.BUILD_NUMBER}",
                       // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
                     )
@@ -68,7 +70,7 @@ pipeline {
                     //Optional parameters
                     targetRepo: 'https://bhc.jfrog.io/docker-prod-local/',
                     displayName: 'Promote me please',
-                    buildName: "webapp-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                    buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
                     comment: 'this is the promotion comment',
                     sourceRepo: 'https://bhc.jfrog.io/docker-staging-local/',
