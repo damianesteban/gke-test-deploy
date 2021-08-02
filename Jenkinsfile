@@ -49,15 +49,15 @@ pipeline {
                     serverId: 'artifactory-server'
                   )
                 }
-                // script {
-                //   rtPublishBuildInfo (
-                //       serverId: 'artifactory-server',
-                //       // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
-                //       buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
-                //       buildNumber: "${env.BUILD_NUMBER}",
-                //       // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
-                //     )
-                // }
+                script {
+                  rtPublishBuildInfo (
+                      serverId: 'artifactory-server',
+                      // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
+                      buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                      buildNumber: "${env.BUILD_NUMBER}",
+                      // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
+                    )
+                }
             }
         }
 
