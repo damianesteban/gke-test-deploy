@@ -19,7 +19,7 @@ pipeline {
             steps {
                 rtServer(
                     id: 'artifactory-server',
-                    credentialsId: 'artifactory-token'
+                    credentialsId: 'artifactory-creds'
                 )
             }
         }
