@@ -20,7 +20,7 @@ pipeline {
                 rtServer(
                     id: 'artifactory-server',
                     url: 'bhc.jfrog.io',
-                    credentialsId: 'artifactory-creds'
+                    credentialsId: 'artifactory-token'
                 )
             }
         }
