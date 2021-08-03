@@ -19,7 +19,7 @@ pipeline {
             steps {
                 rtServer(
                     id: 'artifactory-server',
-                    credentialsId: 'artifactory-creds'
+                    credentialsId: 'artifactory-lp'
                 )
             }
         }
@@ -75,12 +75,12 @@ pipeline {
                     serverId: 'artifactory-server',
 
                     //Optional parameters
-                    targetRepo: 'docker-prod-local',
+                    targetRepo: 'bhc.jfrog.io/docker-prod-local/webapp',
                     displayName: 'Promote me please',
                     buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
                     comment: 'this is the promotion comment',
-                    sourceRepo: 'docker-staging-local',
+                    sourceRepo: 'bhc.jfrog.io/docker-staging-local/webapp',
                     status: 'Released',
                     includeDependencies: false,
                     failFast: true,
