@@ -19,7 +19,6 @@ pipeline {
             steps {
                 rtServer(
                     id: 'artifactory-server',
-                    url: 'bhc.jfrog.io',
                     credentialsId: 'artifactory-token'
                 )
             }
