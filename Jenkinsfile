@@ -15,6 +15,15 @@ pipeline {
         // ! TODO: Add script to get application version from package.json + application name.
     }
     stages {
+        stage('Artifactory Configuration') {
+            steps {
+                rtServer(
+                    id: 'artifactory-server',
+                    url: 'bhc.jfrog.io',
+                    credentials: 'artifactory-creds'
+                )
+            }
+        }
         stage("Checkout code") {
             steps {
                 checkout scm
@@ -36,7 +45,7 @@ pipeline {
                     image: "docker-staging-local/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     targetRepo: 'docker-staging-local',
                     // Attach custom properties to the published artifacts:
-                    properties: 'project-name=webapp;status=stable',
+                    properties: 'project-name=webapp;status=stable;silly=true',
                 )
             }
         }
