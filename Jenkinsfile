@@ -12,7 +12,8 @@ pipeline {
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
         tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
         SERVICE_NAME = 'patient-service'
-        // ! TODO: Add script to get application version from package.json + application name.
+        // ! TODO: Add script to get application
+        // version from package.json + application name.
     }
     stages {
         stage('Artifactory Configuration') {
@@ -32,14 +33,17 @@ pipeline {
         stage("Build and push") {
             steps {
                 script {
-                    docker.build("${params.ARTDOCKER_REGISTRY}/webapp:${shortCommit}")
-                    rtDockerPush(
-                       serverId: 'artifactory-server',
-                       image: "${params.ARTDOCKER_REGISTRY}/webapp:${shortCommit}",
-                       targetRepo: "${params.REPO}",
-                       // Attach custom properties to the published artifacts:
-                       properties: 'project-name=webapp;status=stable;silly=true',
-                    )
+
+                    docker.withRegistry('https://bhc.jfrog.io/docker', 'artifactory-lp')
+                    image = docker.build("webapp:${shortCommit}")
+                    docker.push(image)
+                    // rtDockerPush(
+                    //    serverId: 'artifactory-server',
+                    //    image: "${params.ARTDOCKER_REGISTRY}/webapp:${shortCommit}",
+                    //    targetRepo: "${params.REPO}",
+                    //    // Attach custom properties to the published artifacts:
+                    //    properties: 'project-name=webapp;status=stable;silly=true',
+                    // )
                 }
             }
         }
