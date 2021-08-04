@@ -33,33 +33,13 @@ pipeline {
         stage("Build and push") {
             steps {
                 script {
-
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
                       def customImage = docker.build("docker/webapp:${shortCommit}")
                       customImage.push()
                     }
-                    
-                    // rtDockerPush(
-                    //    serverId: 'artifactory-server',
-                    //    image: "${params.ARTDOCKER_REGISTRY}/webapp:${shortCommit}",
-                    //    targetRepo: "${params.REPO}",
-                    //    // Attach custom properties to the published artifacts:
-                    //    properties: 'project-name=webapp;status=stable;silly=true',
-                    // )
                 }
             }
         }
-        // stage("Push image") {
-        //     steps {
-        //         rtDockerPush(
-        //             serverId: 'artifactory-server',
-        //             image: "bhc.jfrog.io/docker-virtual/webapp:${shortCommit}",
-        //             targetRepo: '',
-        //             // Attach custom properties to the published artifacts:
-        //             properties: 'project-name=webapp;status=stable;silly=true',
-        //         )
-        //     }
-        // }
 
         // stage('Upload build to Jfrog') {
         //     steps {
@@ -89,9 +69,9 @@ pipeline {
         //             serverId: 'artifactory-server',
 
         //             //Optional parameters
-        //             targetRepo: 'docker-prod-local',
+        //             targetRepo: 'docker-production-local',
         //             displayName: 'Promote me please',
-        //             buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+        //             buildName: "webapp-${shortCommit}",
         //             buildNumber: "${env.BUILD_NUMBER}",
         //             comment: 'this is the promotion comment',
         //             sourceRepo: 'docker-staging-local',
