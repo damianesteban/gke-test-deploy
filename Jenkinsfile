@@ -9,7 +9,7 @@ pipeline {
         CREDENTIALS_ID = 'gke'
         ENVIRONMENT = 'development'
         // Script to get the most recent git commit hash (short hash)
-        shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
         tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
         SERVICE_NAME = 'patient-service'
         // ! TODO: Add script to get application version from package.json + application name.
@@ -31,7 +31,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    docker.build("docker-virtual/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
+                    docker.build("docker-virtual/webapp:{shortCommit}")
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 rtDockerPush(
                     serverId: 'artifactory-server',
-                    image: "docker-virtual/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                    image: "docker-virtual/webapp:${shortCommit}",
                     targetRepo: 'docker-development-local',
                     // Attach custom properties to the published artifacts:
                     properties: 'project-name=webapp;status=stable;silly=true',
