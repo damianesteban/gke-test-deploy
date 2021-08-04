@@ -75,12 +75,12 @@ pipeline {
                     serverId: 'artifactory-server',
 
                     //Optional parameters
-                    targetRepo: 'bhc.jfrog.io/docker-prod-local/webapp',
+                    targetRepo: 'docker-prod-local',
                     displayName: 'Promote me please',
                     buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
                     comment: 'this is the promotion comment',
-                    sourceRepo: 'bhc.jfrog.io/docker-staging-local/webapp',
+                    sourceRepo: 'docker-staging-local',
                     status: 'Released',
                     includeDependencies: false,
                     failFast: true,
