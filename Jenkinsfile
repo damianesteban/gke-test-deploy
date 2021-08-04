@@ -32,12 +32,10 @@ pipeline {
         stage("Build and push") {
             steps {
                 script {
-                    tagName = "${ARTDOCKER_REGISTRY}/webapp:${shortCommit}"
-                    docker.build(tagName)
-                    println "Docker pushing -->" + tagName + " To " + REPO
+                    docker.build("${ARTDOCKER_REGISTRY}/webapp:${shortCommit}")
                     rtDockerPush(
                        serverId: 'artifactory-server',
-                       image: "${tagName}",
+                       image: "${ARTDOCKER_REGISTRY}/webapp:${shortCommit}",
                        targetRepo: "${REPO}",
                        // Attach custom properties to the published artifacts:
                        properties: 'project-name=webapp;status=stable;silly=true',
