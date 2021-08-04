@@ -21,6 +21,7 @@ pipeline {
                     id: 'artifactory-server',
                     credentialsId: 'artifactory-lp'
                 )
+               
             }
         }
         stage("Checkout code") {
@@ -28,24 +29,33 @@ pipeline {
                 checkout scm
             }
         }
-        stage("Build image") {
+        stage("Build and push") {
             steps {
                 script {
-                    docker.build("bhc.jfrog.io/docker-virtual/webapp:${shortCommit}")
+                    tagName = "${ARTDOCKER_REGISTRY}/webapp:${shortCommit}"
+                    docker.build(tagName)
+                    println "Docker pushing -->" + tagName + " To " + REPO
+                    rtDockerPush(
+                       serverId: 'artifactory-server',
+                       image: "${tagName}",
+                       targetRepo: "${REPO}",
+                       // Attach custom properties to the published artifacts:
+                       properties: 'project-name=webapp;status=stable;silly=true',
+                    )
                 }
             }
         }
-        stage("Push image") {
-            steps {
-                rtDockerPush(
-                    serverId: 'artifactory-server',
-                    image: "bhc.jfrog.io/docker-virtual/webapp:${shortCommit}",
-                    targetRepo: 'bhc.jfrog.io/docker-development-local',
-                    // Attach custom properties to the published artifacts:
-                    properties: 'project-name=webapp;status=stable;silly=true',
-                )
-            }
-        }
+        // stage("Push image") {
+        //     steps {
+        //         rtDockerPush(
+        //             serverId: 'artifactory-server',
+        //             image: "bhc.jfrog.io/docker-virtual/webapp:${shortCommit}",
+        //             targetRepo: '',
+        //             // Attach custom properties to the published artifacts:
+        //             properties: 'project-name=webapp;status=stable;silly=true',
+        //         )
+        //     }
+        // }
 
         // stage('Upload build to Jfrog') {
         //     steps {
