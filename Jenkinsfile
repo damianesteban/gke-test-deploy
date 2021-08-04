@@ -31,7 +31,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    docker.build("docker-virtual/webapp:{shortCommit}")
+                    docker.build("docker-virtual/webapp:${shortCommit}")
                 }
             }
         }
