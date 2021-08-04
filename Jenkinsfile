@@ -31,7 +31,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    docker.build("bhc.jfrog.io/docker-staging-local/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
+                    docker.build("services/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}")
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 rtDockerPush(
                     serverId: 'artifactory-server',
-                    image: "bhc.jfrog.io/docker-staging-local/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+                    image: "services/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
                     targetRepo: 'docker-staging-local',
                     // Attach custom properties to the published artifacts:
                     properties: 'project-name=webapp;status=stable;silly=true',
