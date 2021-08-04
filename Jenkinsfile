@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
 
-                    docker.withRegistry('https://bhc.jfrog.io/docker', 'artifactory-lp') {
+                    docker.withRegistry('https://bhc.jfrog.io/artifactory', 'artifactory-lp') {
                       def customImage = docker.build("webapp:${shortCommit}")
                       customImage.push()
                     }
