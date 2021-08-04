@@ -145,18 +145,18 @@ dist
 .vscode-test
 
 # yarn v2
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
+# .yarn/cache
+# .yarn/unplugged
+# .yarn/build-state.yml
+# .yarn/install-state.gz
+# .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/node,macos
 
 .yarn/*
+!.yarn/cache
 !.yarn/patches
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
-.pnp.*
