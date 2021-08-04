@@ -40,54 +40,54 @@ pipeline {
                 rtDockerPush(
                     serverId: 'artifactory-server',
                     image: "bhc.jfrog.io/docker-virtual/webapp:${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
-                    targetRepo: 'docker-staging-local',
+                    targetRepo: 'docker-development-local',
                     // Attach custom properties to the published artifacts:
                     properties: 'project-name=webapp;status=stable;silly=true',
                 )
             }
         }
 
-        stage('Upload build to Jfrog') {
-            steps {
-                script {
-                    rtUpload(
-                    buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
-                    buildNumber: "${env.BUILD_NUMBER}",
-                    serverId: 'artifactory-server'
-                  )
-                }
-                script {
-                  rtPublishBuildInfo (
-                      serverId: 'artifactory-server',
-                      // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
-                      buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
-                      buildNumber: "${env.BUILD_NUMBER}",
-                      // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
-                    )
-                }
-            }
-        }
+        // stage('Upload build to Jfrog') {
+        //     steps {
+        //         script {
+        //             rtUpload(
+        //             buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+        //             buildNumber: "${env.BUILD_NUMBER}",
+        //             serverId: 'artifactory-server'
+        //           )
+        //         }
+        //         script {
+        //           rtPublishBuildInfo (
+        //               serverId: 'artifactory-server',
+        //               // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
+        //               buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+        //               buildNumber: "${env.BUILD_NUMBER}",
+        //               // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
+        //             )
+        //         }
+        //     }
+        // }
 
-        stage('Add interactive promotion') {
-            steps {
-                rtAddInteractivePromotion (
-                    //Mandatory parameter
-                    serverId: 'artifactory-server',
+        // stage('Add interactive promotion') {
+        //     steps {
+        //         rtAddInteractivePromotion (
+        //             //Mandatory parameter
+        //             serverId: 'artifactory-server',
 
-                    //Optional parameters
-                    targetRepo: 'docker-prod-local',
-                    displayName: 'Promote me please',
-                    buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
-                    buildNumber: "${env.BUILD_NUMBER}",
-                    comment: 'this is the promotion comment',
-                    sourceRepo: 'docker-staging-local',
-                    status: 'Released',
-                    includeDependencies: false,
-                    failFast: true,
-                    copy: true
-                )
-            }
-        }
+        //             //Optional parameters
+        //             targetRepo: 'docker-prod-local',
+        //             displayName: 'Promote me please',
+        //             buildName: "webapp-${SERVICE_NAME}-${ENVIRONMENT}-${env.BUILD_ID}-${shortCommit}",
+        //             buildNumber: "${env.BUILD_NUMBER}",
+        //             comment: 'this is the promotion comment',
+        //             sourceRepo: 'docker-staging-local',
+        //             status: 'Released',
+        //             includeDependencies: false,
+        //             failFast: true,
+        //             copy: true
+        //         )
+        //     }
+        // }
     }    
     post {
         always {
