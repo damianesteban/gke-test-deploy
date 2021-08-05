@@ -62,26 +62,26 @@ pipeline {
             }
         }
 
-        // stage('Add interactive promotion') {
-        //     steps {
-        //         rtAddInteractivePromotion (
-        //             //Mandatory parameter
-        //             serverId: 'artifactory-server',
+        stage('Add interactive promotion') {
+            steps {
+                rtAddInteractivePromotion (
+                    //Mandatory parameter
+                    serverId: 'artifactory-server',
 
-        //             //Optional parameters
-        //             targetRepo: 'docker-staging-local',
-        //             displayName: 'Promote me please',
-        //             buildName: "webapp-${shortCommit}",
-        //             buildNumber: "${env.BUILD_NUMBER}",
-        //             comment: 'this is the promotion comment',
-        //             sourceRepo: 'docker-development-local',
-        //             status: 'Released',
-        //             includeDependencies: false,
-        //             failFast: true,
-        //             copy: true
-        //         )
-        //     }
-        // }
+                    //Optional parameters
+                    targetRepo: 'docker-staging-local',
+                    displayName: 'Promote me please',
+                    buildName: "webapp-${shortCommit}",
+                    buildNumber: "${env.BUILD_NUMBER}",
+                    comment: 'this is the promotion comment',
+                    sourceRepo: 'docker-development-local',
+                    status: 'Released',
+                    includeDependencies: false,
+                    failFast: true,
+                    copy: true
+                )
+            }
+        }
     }    
     post {
         always {
