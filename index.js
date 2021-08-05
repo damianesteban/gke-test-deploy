@@ -8,11 +8,25 @@ const express = require('express');
 
 const rr = new URLSearchParams();
 
+class Namer {
+  #name;
+  #isNameSet;
 
+  constructor(name) {
+    this.#name = name;  
+  }
 
+  get name() {
+    return this.#name;
+  }
 
+  set name() {
+    this.#isNameSet = true;
+  }
+}
 
-
+const nameroo = new Namer('Balls');
+console.log(nameroo.name)
 
 
 
@@ -26,7 +40,6 @@ const PORT = process.env.PORT || 3000;
 
 
 const name = 'd';
-console.log(name);
 
 
 // App
