@@ -82,21 +82,6 @@ pipeline {
                 )
             }
         }
-
-        stage('Post Deployment Test') {
-          steps {
-            jiraSendDeploymentInfo (
-                environmentId: 'us-prod-1', 
-                environmentName: 'us-prod-1', 
-                environmentType: 'production', 
-                serviceIds: [
-                    'b:YXJpOmNsb3VkOmdyYXBoOjpzZXJ2aWNlLzk5OTVlNzFhLTEwMTgtMTFlYi05MzA3LTBhNzdmM2Y0NTMwNC80OWMzYTkzOC1mNjI4LTExZWItOWEwMC0wYWJlM2Y0YTY2MDE='
-                ], 
-                site: 'betterpt.atlassian.net', 
-                state: 'in_progress'
-            )
-          }
-        }
     }    
     post {
         always {
