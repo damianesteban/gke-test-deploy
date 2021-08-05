@@ -69,7 +69,7 @@ pipeline {
                     serverId: 'artifactory-server',
 
                     //Optional parameters
-                    targetRepo: 'docker-staging-local',
+                    targetRepo: 'default-generic-local',
                     displayName: 'Promote me please',
                     buildName: "webapp-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
