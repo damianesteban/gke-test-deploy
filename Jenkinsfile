@@ -92,6 +92,7 @@ pipeline {
                     notFailBuild: true,
                     patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
                                [pattern: '.propsfile', type: 'EXCLUDE']])
+          jiraSendBuildInfo site: 'betterpt.atlassian.net'
         }
     }
 }
