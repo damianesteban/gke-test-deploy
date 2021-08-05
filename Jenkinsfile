@@ -69,12 +69,12 @@ pipeline {
                     serverId: 'artifactory-server',
 
                     //Optional parameters
-                    targetRepo: 'docker-production-local',
+                    targetRepo: 'docker-staging-local',
                     displayName: 'Promote me please',
                     buildName: "webapp-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
                     comment: 'this is the promotion comment',
-                    sourceRepo: 'docker-staging-local',
+                    sourceRepo: 'docker-development-local',
                     status: 'Released',
                     includeDependencies: false,
                     failFast: true,
