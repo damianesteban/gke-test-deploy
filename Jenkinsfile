@@ -30,6 +30,7 @@ pipeline {
                 checkout scm
             }
         }
+        
         stage("Build and push") {
             steps {
                 script {
