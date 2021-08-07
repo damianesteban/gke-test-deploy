@@ -12,8 +12,8 @@ pipeline {
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
         tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
         SERVICE_NAME = 'patient-service'
-        SOURCE_REPO = 'docker-staging-local'
-        TARGET_REPO = 'docker-production-local'
+        SOURCE_REPO = 'docker-development-local'
+        TARGET_REPO = 'docker-staging-local'
         // ! TODO: Add script to get application
         // version from package.json + application name.
     }
