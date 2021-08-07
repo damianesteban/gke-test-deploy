@@ -30,7 +30,7 @@ pipeline {
                 checkout scm
             }
         }
-        
+
         stage("Build and push") {
             steps {
                 script {
@@ -70,7 +70,7 @@ pipeline {
                     serverId: 'artifactory-server',
 
                     //Optional parameters
-                    targetRepo: 'default-generic-local',
+                    targetRepo: 'default-staging-local/webapp',
                     displayName: 'Promote me please',
                     buildName: "webapp-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
