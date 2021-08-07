@@ -70,7 +70,7 @@ pipeline {
                     serverId: 'artifactory-server',
 
                     //Optional parameters
-                    targetRepo: 'default-staging-local/webapp',
+                    targetRepo: 'default-staging-local',
                     displayName: 'Promote me please',
                     buildName: "webapp-${shortCommit}",
                     buildNumber: "${env.BUILD_NUMBER}",
