@@ -118,7 +118,7 @@ def reTagLatest (targetRepo) {
               break
     }
     sh 'cat retaga_out.json'
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory-lp']]) {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory-lp', usernameVariable: 'damian@betterpt.com', passwordVariable: 'RxScala1979']]) {
         "curl -u damian@betterpt.com:RxScala1979! https://bhc.jrog.io"
         def curlString = "curl -u damian@betterpt.com:RxScala1979! https://bhc.jrog.io/artifactory"
         def regTagStr = curlString +  "/api/docker/${targetRepo}/v2/promote -X POST -H 'Content-Type: application/json' -T retaga_out.json"
@@ -128,7 +128,7 @@ def reTagLatest (targetRepo) {
 }
 
 def updateProperty (property) {
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory-lp']]) {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory-lp', usernameVariable: 'damian@betterpt.com', passwordVariable: 'RxScala1979!']]) {
             def curlString = "curl -u damian@betterpt.com:RxScala1979! PUT https://bhc.jrog.io/artifactory"
             def updatePropStr = curlString +  "/api/storage/${SOURCE_REPO}/webapp/${shortCommit}?properties=${property}"
             println "Curl String is " + updatePropStr
