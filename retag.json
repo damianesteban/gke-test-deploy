@@ -1,0 +1,7 @@
+{
+  "targetRepo" : "TARGETREPO",
+  "dockerRepository" : "webapp",
+  "tag" : "@",
+  "targetTag" : "latest",
+  "copy": true
+}
