@@ -111,10 +111,10 @@ def reTagLatest (targetRepo) {
     sh 'sed -E "s/@/${shortCommit}/" retag.json > retag_out.json'
     switch (targetRepo) {
           case PROMOTE_REPO :
-              sh 'sed -E "s/TARGET_REPO/${PROMOTE_REPO}/" retag_out.json > retaga_out.json'
+              sh 'sed -E "s/TARGETREPO/${PROMOTE_REPO}/" retag_out.json > retaga_out.json'
               break
           case SOURCE_REPO :
-              sh 'sed -E "s/TARGET_REPO/${SOURCE_REPO}/" retag_out.json > retaga_out.json'
+              sh 'sed -E "s/TARGETREPO/${SOURCE_REPO}/" retag_out.json > retaga_out.json'
               break
     }
     sh 'cat retaga_out.json'
@@ -130,7 +130,7 @@ def reTagLatest (targetRepo) {
 def updateProperty (property) {
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory-lp']]) {
             def curlString = "curl -u damian@betterpt.com:RxScala1979! PUT https://bhc.jrog.io/artifactory"
-            def updatePropStr = curlString +  "/api/storage/${SOURCE_REPO}/webapp/${env.BUILD_NUMBER}?properties=${property}"
+            def updatePropStr = curlString +  "/api/storage/${SOURCE_REPO}/webapp/${shortCommit}?properties=${property}"
             println "Curl String is " + updatePropStr
             sh updatePropStr
      }
