@@ -39,6 +39,7 @@ pipeline {
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
                       def customImage = docker.build("docker/webapp:${shortCommit}")
                       customImage.push()
+                      customImage.push('latest')
                     }
                 }
             }
@@ -65,33 +66,53 @@ pipeline {
         //     }
         // }
 
-        stage('Add interactive promotion') {
-            steps {
-                rtAddInteractivePromotion (
-                    //Mandatory parameter
-                    serverId: 'artifactory-server',
+        // stage('Add interactive promotion') {
+        //     steps {
+        //         rtAddInteractivePromotion (
+        //             //Mandatory parameter
+        //             serverId: 'artifactory-server',
 
-                    //Optional parameters
-                    targetRepo: 'default-staging-local',
-                    displayName: 'Promote me please',
-                    buildName: "webapp-${shortCommit}",
-                    buildNumber: "${env.BUILD_NUMBER}",
-                    comment: 'this is the promotion comment',
-                    sourceRepo: 'docker-development-local',
-                    status: 'Released',
-                    includeDependencies: false,
-                    failFast: true,
-                    copy: true
-                )
-            }
-        }
+        //             //Optional parameters
+        //             targetRepo: 'default-staging-local',
+        //             displayName: 'Promote me please',
+        //             buildName: "webapp-${shortCommit}",
+        //             buildNumber: "${env.BUILD_NUMBER}",
+        //             comment: 'this is the promotion comment',
+        //             sourceRepo: 'docker-development-local',
+        //             status: 'Released',
+        //             includeDependencies: false,
+        //             failFast: true,
+        //             copy: true
+        //         )
+        //     }
+        // }
 
         stage ("Retag latest image") {
             steps {
                 reTagLatest (SOURCE_REPO)   
             }
         }
+        stage ('Promote') {
+            steps { 
+               def promotionConfig = [
+                'buildName'          : env.JOB_NAME,
+                'buildNumber'        : env.BUILD_NUMBER,
+                'targetRepo'         : PROMOTE_REPO,
+                'comment'            : 'App works with latest released version of gradle swampup app, tomcat and jdk',
+                'sourceRepo'         : SOURCE_REPO,
+                'status'             : 'Released',
+                'includeDependencies': false,
+                'copy'               : true
+            ]
+            rtServer.promote promotionConfig
+            reTagLatest (SOURCE_REPO)
+            reTagLatest (PROMOTE_REPO)
+            }
+
+        }
+        // promote war file from gradle-dev-local to gradle-release-local
     }    
+        //Promote docker image from staging local repo to production repo in Artifactory
     post {
         always {
             echo 'Pipeline completed successfully'
