@@ -94,19 +94,19 @@ pipeline {
         }
         stage ('Promote') {
             steps { 
-               def promotionConfig = [
-                'buildName'          : env.JOB_NAME,
-                'buildNumber'        : env.BUILD_NUMBER,
-                'targetRepo'         : PROMOTE_REPO,
-                'comment'            : 'App works with latest released version of gradle swampup app, tomcat and jdk',
-                'sourceRepo'         : SOURCE_REPO,
-                'status'             : 'Released',
-                'includeDependencies': false,
-                'copy'               : true
-            ]
-            rtServer.promote promotionConfig
-            reTagLatest (SOURCE_REPO)
-            reTagLatest (PROMOTE_REPO)
+                promotionConfig = [
+                    'buildName'          : env.JOB_NAME,
+                    'buildNumber'        : env.BUILD_NUMBER,
+                    'targetRepo'         : PROMOTE_REPO,
+                    'comment'            : 'App works with latest released version of gradle swampup app, tomcat and jdk',
+                    'sourceRepo'         : SOURCE_REPO,
+                    'status'             : 'Released',
+                    'includeDependencies': false,
+                    'copy'               : true
+                ]
+                rtServer.promote promotionConfig
+                reTagLatest (SOURCE_REPO)
+                reTagLatest (PROMOTE_REPO)
             }
 
         }
