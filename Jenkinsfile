@@ -108,7 +108,7 @@ pipeline {
 
 //Tag docker image
 def reTagLatest (targetRepo) {
-    sh 'sed -E "s/@/${env.BUILD_NUMBER}/" retag.json > retag_out.json'
+    sh 'sed -E "s/@/${shortCommit}/" retag.json > retag_out.json'
     switch (targetRepo) {
           case PROMOTE_REPO :
               sh 'sed -E "s/$docker/${PROMOTE_REPO}/" retag_out.json > retaga_out.json'
@@ -121,7 +121,7 @@ def reTagLatest (targetRepo) {
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory-lp']]) {
         "curl -u damian@betterpt.com:RxScala1979! https://bhc.jrog.io"
         def curlString = "curl -u damian@betterpt.com:RxScala1979! https://bhc.jrog.io/artifactory"
-        def regTagStr = curlString +  "/api/docker/$targetRepo/v2/promote -X POST -H 'Content-Type: application/json' -T retaga_out.json"
+        def regTagStr = curlString +  "/api/docker/${targetRepo}/v2/promote -X POST -H 'Content-Type: application/json' -T retaga_out.json"
         println "Curl String is " + regTagStr
         sh regTagStr
     }
