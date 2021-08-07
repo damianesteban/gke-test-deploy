@@ -111,10 +111,10 @@ def reTagLatest (targetRepo) {
     sh 'sed -E "s/@/${shortCommit}/" retag.json > retag_out.json'
     switch (targetRepo) {
           case PROMOTE_REPO :
-              sh 'sed -E "s/$docker/${PROMOTE_REPO}/" retag_out.json > retaga_out.json'
+              sh 'sed -E "s/TARGET_REPO/${PROMOTE_REPO}/" retag_out.json > retaga_out.json'
               break
           case SOURCE_REPO :
-              sh 'sed -E "s/$docker/${SOURCE_REPO}/" retag_out.json > retaga_out.json'
+              sh 'sed -E "s/TARGET_REPO/${SOURCE_REPO}/" retag_out.json > retaga_out.json'
               break
     }
     sh 'cat retaga_out.json'
