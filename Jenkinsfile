@@ -95,7 +95,7 @@ pipeline {
         stage ('Promote') {
             steps { 
                 script {
-                  def promotionConfig = [
+                  promotionConfig = [
                     'buildName'          : env.JOB_NAME,
                     'buildNumber'        : env.BUILD_NUMBER,
                     'targetRepo'         : PROMOTE_REPO,
@@ -104,10 +104,12 @@ pipeline {
                     'status'             : 'Released',
                     'includeDependencies': false,
                     'copy'               : true
-                ]
-                rtPromote(promotionConfig)
-                reTagLatest(SOURCE_REPO)
-                reTagLatest(PROMOTE_REPO)
+                    ]
+                    rtPromote(promotionConfig)
+                }
+                script {
+                    reTagLatest(SOURCE_REPO)
+                    reTagLatest(PROMOTE_REPO)
                 }
 
             }
