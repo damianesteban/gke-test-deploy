@@ -45,8 +45,8 @@ pipeline {
             }
         }
 
-        // stage('Upload build to Jfrog') {
-        //     steps {
+        stage('Upload build to Jfrog') {
+            
         //         script {
         //             rtUpload(
         //             buildName: "webapp:${shortCommit}",
@@ -54,17 +54,14 @@ pipeline {
         //             serverId: 'artifactory-server'
         //           )
         //         }
-        //         script {
-        //           rtPublishBuildInfo (
-        //               serverId: 'artifactory-server',
-        //               // If the build name and build number are not set here, the current job name and number will be used. Make sure to use the same value used in the rtDockerPull and/or rtDockerPush steps.
-        //               buildName: "webapp:${shortCommit}",
-        //               buildNumber: "${env.BUILD_NUMBER}",
-        //               // Optional - Only if this build is associated with a project in Artifactory, set the project key as follows.
-        //             )
-        //         }
-        //     }
-        // }
+        steps {
+                script {
+                  rtPublishBuildInfo (
+                      serverId: 'artifactory-server',
+                    )
+                }
+             }
+        }
 
         // stage('Add interactive promotion') {
         //     steps {
@@ -92,29 +89,29 @@ pipeline {
                 reTagLatest (SOURCE_REPO)   
             }
         }
-        stage ('Promote') {
-            steps { 
-                script {
-                  promotionConfig = [
-                    'buildName'          : env.JOB_NAME,
-                    'buildNumber'        : env.BUILD_NUMBER,
-                    'targetRepo'         : PROMOTE_REPO,
-                    'comment'            : 'App now works with the internet.',
-                    'sourceRepo'         : SOURCE_REPO,
-                    'status'             : 'Released',
-                    'includeDependencies': false,
-                    'copy'               : true
-                    ]
-                    rtPromote(promotionConfig)
-                }
-                script {
-                    reTagLatest(SOURCE_REPO)
-                    reTagLatest(PROMOTE_REPO)
-                }
+        // stage ('Promote') {
+        //     steps { 
+        //         script {
+        //           promotionConfig = [
+        //             'buildName'          : env.JOB_NAME,
+        //             'buildNumber'        : env.BUILD_NUMBER,
+        //             'targetRepo'         : PROMOTE_REPO,
+        //             'comment'            : 'App now works with the internet.',
+        //             'sourceRepo'         : SOURCE_REPO,
+        //             'status'             : 'Released',
+        //             'includeDependencies': false,
+        //             'copy'               : true
+        //             ]
+        //             rtPromote(promotionConfig)
+        //         }
+        //         script {
+        //             reTagLatest(SOURCE_REPO)
+        //             reTagLatest(PROMOTE_REPO)
+        //         }
 
-            }
+        //     }
 
-        }
+        // }
         // promote war file from gradle-dev-local to gradle-release-local
     }    
         //Promote docker image from staging local repo to production repo in Artifactory
@@ -154,6 +151,7 @@ def reTagLatest (targetRepo) {
 }
 
 def updateProperty (property) {
+    sh "echo IN UPDATE PROPS BLOCK"
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'artifactory-lp', usernameVariable: 'damian@betterpt.com', passwordVariable: 'RxScala1979!']]) {
             def curlString = "curl -u damian@betterpt.com:RxScala1979! PUT https://bhc.jfrog.io/artifactory"
             def updatePropStr = curlString +  "/api/storage/${SOURCE_REPO}/webapp/${shortCommit}?properties=${property}"
