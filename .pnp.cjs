@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express", "npm:4.17.1"],
             ["husky", "npm:7.0.1"],
             ["jest", "virtual:6a0bc49364e6ba486730d3b3447a0aa8d0b4aeccef50a042d45bd5612da19b91a3f8b83cc90c25e4f2d1dd6a0a703480e83b6773532dc24d957bb66646f835c3#npm:27.0.6"],
+            ["lodash", "npm:4.17.21"],
             ["semantic-release", "npm:17.4.4"]
           ],
           "linkType": "SOFT",
@@ -9024,6 +9025,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express", "npm:4.17.1"],
             ["husky", "npm:7.0.1"],
             ["jest", "virtual:6a0bc49364e6ba486730d3b3447a0aa8d0b4aeccef50a042d45bd5612da19b91a3f8b83cc90c25e4f2d1dd6a0a703480e83b6773532dc24d957bb66646f835c3#npm:27.0.6"],
+            ["lodash", "npm:4.17.21"],
             ["semantic-release", "npm:17.4.4"]
           ],
           "linkType": "SOFT",
