@@ -63,6 +63,16 @@ pipeline {
              }
         }
 
+        stage('Promote') {
+            script {
+                rtPromote (
+                    serverId: 'artifactory-server',
+                    targetRepo: artifactoryPromotedRepository,
+                    sourceRepo: artifactoryRepository
+                )
+            }
+        }
+
         // stage('Add interactive promotion') {
         //     steps {
         //         rtAddInteractivePromotion (
@@ -84,11 +94,11 @@ pipeline {
         //     }
         // }
 
-        stage ("Retag latest image") {
-            steps {
-                reTagLatest (SOURCE_REPO)   
-            }
-        }
+        // stage ("Retag latest image") {
+        //     steps {
+        //         reTagLatest (SOURCE_REPO)   
+        //     }
+        // }
         // stage ('Promote') {
         //     steps { 
         //         script {
