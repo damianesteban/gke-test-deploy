@@ -118,17 +118,17 @@ pipeline {
         // }
         // promote war file from gradle-dev-local to gradle-release-loca
         //Promote docker image from staging local repo to production repo in Artifactory
-    post {
-        always {
-            echo 'Pipeline completed successfully'
-            cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
-        }
-    }
+    // post {
+    //     always {
+    //         echo 'Pipeline completed successfully'
+    //         cleanWs(cleanWhenNotBuilt: false,
+    //                 deleteDirs: true,
+    //                 disableDeferredWipeout: true,
+    //                 notFailBuild: true,
+    //                 patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+    //                            [pattern: '.propsfile', type: 'EXCLUDE']])
+    //     }
+    // }
         
 }
 
