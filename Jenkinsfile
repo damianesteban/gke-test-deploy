@@ -46,30 +46,24 @@ pipeline {
         }
 
         stage('Upload build to Jfrog') {
-            
-        //         script {
-        //             rtUpload(
-        //             buildName: "webapp:${shortCommit}",
-        //             buildNumber: "${env.BUILD_NUMBER}",
-        //             serverId: 'artifactory-server'
-        //           )
-        //         }
-        steps {
+            steps {
                 script {
-                  rtPublishBuildInfo (
-                      serverId: 'artifactory-server',
+                    rtPublishBuildInfo (
+                        serverId: 'artifactory-server',
                     )
                 }
-             }
+            }
         }
 
         stage('Promote') {
-            script {
-                rtPromote (
-                    serverId: 'artifactory-server',
-                    targetRepo: artifactoryPromotedRepository,
-                    sourceRepo: artifactoryRepository
-                )
+            steps {
+                script {
+                    rtPromote (
+                        serverId: 'artifactory-server',
+                        targetRepo: artifactoryPromotedRepository,
+                        sourceRepo: artifactoryRepository
+                    )
+                }
             }
         }
 
@@ -122,8 +116,7 @@ pipeline {
         //     }
 
         // }
-        // promote war file from gradle-dev-local to gradle-release-local
-    }    
+        // promote war file from gradle-dev-local to gradle-release-loca
         //Promote docker image from staging local repo to production repo in Artifactory
     post {
         always {
