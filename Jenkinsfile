@@ -60,8 +60,8 @@ pipeline {
                 script {
                     rtPromote (
                         serverId: 'artifactory-server',
-                        targetRepo: artifactoryPromotedRepository,
-                        sourceRepo: artifactoryRepository
+                        targetRepo: TARGET_REPO,
+                        sourceRepo: SOURCE_REPO
                     )
                 }
             }
