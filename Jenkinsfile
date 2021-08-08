@@ -99,15 +99,15 @@ pipeline {
                     'buildName'          : env.JOB_NAME,
                     'buildNumber'        : env.BUILD_NUMBER,
                     'targetRepo'         : PROMOTE_REPO,
-                    'comment'            : 'App works with latest released version of gradle swampup app, tomcat and jdk',
+                    'comment'            : 'App now works with the internet.',
                     'sourceRepo'         : SOURCE_REPO,
                     'status'             : 'Released',
                     'includeDependencies': false,
                     'copy'               : true
                 ]
-                rtServer.promote promotionConfig
-                reTagLatest (SOURCE_REPO)
-                reTagLatest (PROMOTE_REPO)
+                rtPromote(promotionConfig)
+                reTagLatest(SOURCE_REPO)
+                reTagLatest(PROMOTE_REPO)
                 }
 
             }
