@@ -26,20 +26,11 @@ console.log(nameroo.name)
 // Constants
 const PORT = process.env.PORT || 3000;
 
-
-
-
-
-
-
-
-
-
 const name = 'd';
 console.log('NAME: ', name);
+
 // App
 const app = express();
-
 
 app.use('/web', express.static('public'))
 
