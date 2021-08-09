@@ -68,7 +68,16 @@ pipeline {
         }
 
         stage('Retag') {
-            docker.retag("docker-staging-local/webapp:${shortCommit}")
+
+            steps {
+
+                script {
+                        docker.retag("docker-staging-local/webapp:${shortCommit}")
+                }
+
+
+            }
+            
         }
     //     stage('Push to Docker Staging') {
     //         script {
