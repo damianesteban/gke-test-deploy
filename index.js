@@ -1,5 +1,4 @@
 'use strict';
-const { from } = require('rxjs');
 const express = require('express');
 class Namer {
   #name;
@@ -39,8 +38,7 @@ const app = express();
 app.use('/web', express.static('public'))
 
 app.get('/', function (req, res) {
-  const xs = from(['a', 'b', 'c']).subscribe(x => res.send(x));
-  return xs;
+  res.send({ good: true }).status(200);
 });
 
 app.listen(PORT);
