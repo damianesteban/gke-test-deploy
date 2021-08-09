@@ -69,13 +69,13 @@ pipeline {
         }
 
         stage('Retag and Push') {
+            def image
             steps {
                 script {
-                    docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-                        def pulledImage = docker.image('docker-development-local/webapp:development-${shortCommit}')
-                        pulledImage.pull()
-                        pulledImage.push('staging-${shortCommit}')
-                        pulledImage.push('latest')
+                    docker.withRegistry('https://bhc.jfrog.io/docker-development-local', 'artifactory-lp') {
+                        image = docker.image('webapp:development-${shortCommit}')
+                        image.pull()
+
                     }
                     
                 }
