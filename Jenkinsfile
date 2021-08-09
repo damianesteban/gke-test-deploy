@@ -3,6 +3,7 @@ def artifactoryServerUrl = 'https://bhc.jfrog.io/artifactory'
 def artifactoryServerCredentialsId = 'artifactory-lp'
 def artifactoryDevelopmentRepository = 'docker-development-local'
 def artifactoryStagingRepository = 'docker-staging-local'
+def artifactoryProductionRepository = 'docker-production-local'
 def artifactoryDockerRegistry = 'bhc.jfrog.io'
 def imageName = 'webapp'
 
