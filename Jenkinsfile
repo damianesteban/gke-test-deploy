@@ -71,8 +71,7 @@ pipeline {
         stage('Retag and Push') {
             steps {
                 script {
-                    def curlOut = sh script: """curl -X POST --user user:passe --data '{"state":"${stateStr}", "context": "branch-regression"}' --url ${Configuration.CommitStatusUpdateURL} """, returnOutput: true
-                    sh """curl -u damian@betterpt.com:RxScala1979! -X POST "https://bhc.jfrog.io/artifactory/api/docker/docker-development-local/v2/promote" -H "Content-Type: application/json" -d '{"dockerRepository": "docker-development-local/webapp", "targetRepo": "docker-staging-local", "tag": "development-${shortCommit}", "targetTag": "staging-${shortCommit}" }' """
+                    sh """ curl -u damian@betterpt.com:RxScala1979! -X POST "https://bhc.jfrog.io/artifactory/api/docker/docker-development-local/v2/promote" -H "Content-Type: application/json" -d '{"dockerRepository": "docker-development-local/webapp", "targetRepo": "docker-staging-local", "tag": "development-${shortCommit}", "targetTag": "staging-${shortCommit}" }' """
                     // // docker.withRegistry('https://bhc.jfrog.io/docker-development-local', 'artifactory-lp') {
                     //     image = docker.image('webapp:development-${shortCommit}')
                     //     image.pull()
