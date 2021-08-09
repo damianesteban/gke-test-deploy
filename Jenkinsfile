@@ -72,7 +72,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-                        sh "git pull docker-development-local/webapp:${shortCommit}"
+                        sh "docker pull docker-development-local/webapp:${shortCommit}"
                         sh 'docker tag docker-development-local/webapp docker-development-local/webapp:development-${shortCommit} docker-staging-local/webapp-staging:${shortCommit}'
                         
                     }
