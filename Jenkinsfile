@@ -65,5 +65,13 @@ pipeline {
                 }
             }
         }
-    }  
+
+    //     stage('Push to Docker Staging') {
+    //         script {
+    //             docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
+    //             def customImage = docker.pull("docker-/webapp:${shortCommit}")
+    //                   customImage.push('latest')
+    //         }
+    //     }
+    // }  
 }
