@@ -24,7 +24,6 @@ pipeline {
                     id: 'artifactory-server',
                     credentialsId: 'artifactory-lp'
                 )
-               
             }
         }
 
@@ -46,7 +45,7 @@ pipeline {
             }
         }
 
-        stage('Upload build to Jfrog') {
+        stage('Publish build to Jfrog') {
             steps {
                 script {
                     rtPublishBuildInfo (
@@ -72,7 +71,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-                        def pulledImage = docker.image('docker-development-local/webapp-development:${shortCommit}')
+                        def pulledImage = docker.image('docker-development-local/webapp:development-${shortCommit}')
                         pulledImage.pull()
                         pulledImage.tag(['docker-staging-local/webapp-staging:${shortCommit}', 'latest'])
                         pulledImage.push()
