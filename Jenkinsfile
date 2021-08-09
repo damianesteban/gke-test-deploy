@@ -61,7 +61,7 @@ pipeline {
             }
         }
 
-        // We don't have Xray Scan on the free version.
+        // ! NOTE: We don't have Xray Scan with the free version.
         // stage('Xray scan') {
         //     steps {
         //         xrayScan(
@@ -71,10 +71,16 @@ pipeline {
         //     }
         // }
 
-        // Promotion Step. This removes the image from the development docker repo and pushesd it to the staging docker repo
+        // Promotion Step. This removes the image from the development docker repo and pushesd it to the staging docker repo.
+        // There can also be a manual promotion step here.
         stage ('Promotion') {
             steps {
-                rtPromote (
+                // rtPromote (
+                //     serverId: artifactoryServerId,
+                //     targetRepo: artifactoryStagingRepository,
+                //     sourceRepo: artifactoryDevelopmentRepository
+                // )
+                rtAddInteractivePromotion(
                     serverId: artifactoryServerId,
                     targetRepo: artifactoryStagingRepository,
                     sourceRepo: artifactoryDevelopmentRepository
