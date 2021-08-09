@@ -69,26 +69,16 @@ pipeline {
         }
 
         stage('Retag and Push') {
-            def image
             steps {
                 script {
-
                     sh 'curl -u damian@betterpt.com:RxScala1979! -X POST "https://bhc.jfrog.io/api/docker/docker-development-local/v2/promote" -H "Content-Type: application/json" -d "{\"dockerRepository\": \"docker-development-local/webapp\", \"targetRepo\": \"docker-staging-local\", \"tag\": \"development-${shortCommit}\", \"targetTag\": \"staging-${shortCommit}\" }"'
                     // // docker.withRegistry('https://bhc.jfrog.io/docker-development-local', 'artifactory-lp') {
                     //     image = docker.image('webapp:development-${shortCommit}')
                     //     image.pull()
                         
                     // }
-                    
                 }
             }   
         }
-    //     stage('Push to Docker Staging') {
-    //         script {
-    //             docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-        //             def customImage = docker.pull("docker-/webapp:${shortCommit}")
-        //                   customImage.push('latest')
-    //         }
-    //     }
     }  
 }
