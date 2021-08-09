@@ -1,12 +1,13 @@
 def artifactoryServerId = 'artifactory-server'
 def artifactoryServerUrl = 'https://bhc.jfrog.io/artifactory'
 def artifactoryServerCredentialsId = 'artifactory-lp'
-def artifactoryRepository = 'docker-development-local'
-def artifactoryPromotedRepository = 'docker-staging-local'
+def artifactoryDevelopmentRepository = 'docker-development-local'
+def artifactoryStagingRepository = 'docker-staging-local'
 def artifactoryDockerRegistry = 'bhc.jfrog.io'
 def imageName = 'webapp'
 
 pipeline {
+
     agent any
     environment {
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
@@ -19,7 +20,7 @@ pipeline {
                 checkout scm
             }
         }
-        
+        // Configures the Artifactory server
         stage('Artifactory configuration') {
             steps {
                 rtServer(
@@ -30,7 +31,7 @@ pipeline {
             }
         }
 
-
+        // Builds the image. Of coure we don't need to use the Artifactory methods here if we don't want to
         stage('Build docker image') {
             steps {
                 script {
@@ -38,15 +39,19 @@ pipeline {
                 }
             }
         }
+
+        // Pushes the image to the Artifactory server
         stage('Push Image to Artifactory') {
             steps {
                 rtDockerPush(
                     serverId: artifactoryServerId,
                     image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${shortCommit}",
-                    targetRepo: artifactoryRepository
+                    targetRepo: artifactoryDevelopmentRepository
                 )
             }
         }
+
+        // Publishes the build info to Artifactory
         stage('Publish build info') {
             steps {
                 rtPublishBuildInfo(
@@ -54,6 +59,8 @@ pipeline {
                 )
             }
         }
+
+        // We don't have Xray Scan on the free version.
         // stage('Xray scan') {
         //     steps {
         //         xrayScan(
@@ -62,98 +69,16 @@ pipeline {
         //         )
         //     }
         // }
+
+        // Promotion Step. This removes the image from the development docker repo and pushesd it to the staging docker repo
         stage ('Promotion') {
             steps {
                 rtPromote (
                     serverId: artifactoryServerId,
-                    targetRepo: artifactoryPromotedRepository,
-                    sourceRepo: artifactoryRepository
+                    targetRepo: artifactoryStagingRepository,
+                    sourceRepo: artifactoryDevelopmentRepository
                 )
             }
         }
     }
 }
-// // library('jenkins-devops-libs')
-
-// pipeline {
-//     agent any
-//     environment {
-//         PROJECT_ID = 'wompy-318104'
-//         CLUSTER_NAME = 'silly-cluster'
-//         LOCATION = 'us-east1-d'
-//         CREDENTIALS_ID = 'gke'
-//         ENVIRONMENT = 'development'
-//         // Script to get the most recent git commit hash (short hash)
-//         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
-//         tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
-//         SERVICE_NAME = 'patient-service'
-//         SOURCE_REPO = 'docker-development-local'
-//         TARGET_REPO = 'docker-staging-local'
-//         // ! TODO: Add script to get application
-//         // version from package.json + application name.
-//     }
-//     stages {
-//         stage('Artifactory Configuration') {
-//             steps {
-//                 rtServer(
-//                     id: 'artifactory-server',
-//                     credentialsId: 'artifactory-lp'
-//                 )
-//             }
-//         }
-
-//         stage("Checkout code") {
-//             steps {
-//                 checkout scm
-//             }
-//         }
-
-//         stage("Build and push") {
-//             steps {
-//                 script {
-//                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-//                       def customImage = docker.build("docker-development-local/webapp:development-${shortCommit}")
-//                       customImage.push()
-//                       customImage.push('latest')
-//                     }
-//                 }
-//             }
-//         }
-
-//         stage('Publish build to Jfrog') {
-//             steps {
-//                 script {
-//                     rtPublishBuildInfo (
-//                         serverId: 'artifactory-server',
-//                     )
-//                 }
-//             }
-//         }
-
-//         stage('Promote') {
-    
-//             steps {
-//                 script {
-//                     rtPromote (
-//                         serverId: 'artifactory-server',
-//                         targetRepo: TARGET_REPO,
-//                         sourceRepo: SOURCE_REPO
-//                     )
-//                 }
-//             }
-//         }
-
-//         stage('Retag and Push') {
-//             steps {
-//                 script {
-//                     sh """ curl -u damian@betterpt.com:RxScala1979! -X POST "https://bhc.jfrog.io/artifactory/api/docker/docker-staging-local/v2/promote" -H "Content-Type: application/json" -d '{"dockerRepository": "webapp", "targetRepo": "docker-staging-local", "tag": "development-${shortCommit}", "targetTag": "staging-${shortCommit}" }' """
-//                     // // docker.withRegistry('https://bhc.jfrog.io/docker-development-local', 'artifactory-lp') {
-//                     //     image = docker.image('webapp:development-${shortCommit}')
-//                     //     image.pull()
-                        
-//                     // }
-//                 }
-//             }   
-//         }
-//     }  
-// }
