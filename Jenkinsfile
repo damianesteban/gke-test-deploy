@@ -67,6 +67,9 @@ pipeline {
             }
         }
 
+        stage('Retag') {
+            docker.retag("docker-staging-local/webapp:${shortCommit}")
+        }
     //     stage('Push to Docker Staging') {
     //         script {
     //             docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
