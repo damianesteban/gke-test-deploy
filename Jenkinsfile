@@ -34,7 +34,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                 script {
-                    docker.build(artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":development-${shortCommit}")
+                    docker.build(artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${shortCommit}")
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
             steps {
                 rtDockerPush(
                     serverId: artifactoryServerId,
-                    image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":development-${shortCommit}",
+                    image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${shortCommit}",
                     targetRepo: artifactoryRepository
                 )
             }
@@ -67,8 +67,7 @@ pipeline {
                 rtPromote (
                     serverId: artifactoryServerId,
                     targetRepo: artifactoryPromotedRepository,
-                    sourceRepo: artifactoryRepository,
-                    targetTag: "staging-${shortCommit}"
+                    sourceRepo: artifactoryRepository
                 )
             }
         }
