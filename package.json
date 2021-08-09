@@ -6,7 +6,7 @@
   "author": "Damian Esteban",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "yarn node index.js",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "test": "jest"
