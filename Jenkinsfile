@@ -73,7 +73,7 @@ pipeline {
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
                         def pulledImage = docker.image('docker-development-local/webapp:development-${shortCommit}')
                         pulledImage.pull()
-                        pulledImage.push('docker-staging-local/webapp:staging:${shortCommit}')
+                        pulledImage.push('docker-staging-local/webapp:staging-${shortCommit}')
                         pulledImage.push('latest')
                     }
                     
