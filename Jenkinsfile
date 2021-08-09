@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-                      def customImage = docker.build("docker-development-local/webapp:${shortCommit}")
+                      def customImage = docker.build("docker-development-local/webapp:development-${shortCommit}")
                       customImage.push()
                       customImage.push('latest')
                     }
@@ -72,9 +72,9 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-                        def imageFromRegistry = docker.pull("docker-development-local/webapp:${shortCommit}")
-                        sh 'docker tag development-local/webapp docker-development-local/webapp:${shortCommit} docker-staging-local/webapp:${shortCommit}'
-                        imageFromRegistry.push()
+                        sh "git pull docker-development-local/webapp:${shortCommit}"
+                        sh 'docker tag docker-development-local/webapp docker-development-local/webapp:development-${shortCommit} docker-staging-local/webapp-staging:${shortCommit}'
+                        
                     }
                     
                 }
