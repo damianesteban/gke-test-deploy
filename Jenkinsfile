@@ -14,11 +14,12 @@ pipeline {
     }
 
     stages {
-        stage('Clone') {
+        stage("Checkout code") {
             steps {
-                git url: gitUrl, branch: gitBranch
+                checkout scm
             }
         }
+        
         stage('Artifactory configuration') {
             steps {
                 rtServer(
@@ -29,11 +30,6 @@ pipeline {
             }
         }
 
-        stage("Checkout code") {
-            steps {
-                checkout scm
-            }
-        }
 
         stage('Build docker image') {
             steps {
@@ -58,14 +54,14 @@ pipeline {
                 )
             }
         }
-        stage('Xray scan') {
-            steps {
-                xrayScan(
-                    serverId: artifactoryServerId,
-                    failBuild: true
-                )
-            }
-        }
+        // stage('Xray scan') {
+        //     steps {
+        //         xrayScan(
+        //             serverId: artifactoryServerId,
+        //             failBuild: true
+        //         )
+        //     }
+        // }
         stage ('Promotion') {
             steps {
                 rtPromote (
