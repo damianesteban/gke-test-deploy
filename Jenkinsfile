@@ -74,7 +74,7 @@ pipeline {
                     docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
                         sh "docker pull docker-development-local/webapp:${shortCommit}"
                         sh 'docker tag docker-development-local/webapp docker-development-local/webapp:development-${shortCommit} docker-staging-local/webapp-staging:${shortCommit}'
-                        
+                        sh 'docker push docker-staging-local/webapp-staging:${shortCommit}'
                     }
                     
                 }
@@ -83,8 +83,8 @@ pipeline {
     //     stage('Push to Docker Staging') {
     //         script {
     //             docker.withRegistry('https://bhc.jfrog.io', 'artifactory-lp') {
-    //             def customImage = docker.pull("docker-/webapp:${shortCommit}")
-    //                   customImage.push('latest')
+        //             def customImage = docker.pull("docker-/webapp:${shortCommit}")
+        //                   customImage.push('latest')
     //         }
     //     }
     }  
