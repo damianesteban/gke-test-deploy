@@ -1,13 +1,6 @@
 'use strict';
-
+const { from } = require('rxjs');
 const express = require('express');
-
-
-
-
-
-const rr = new URLSearchParams();
-
 class Namer {
   #name;
   #isNameSet;
@@ -27,8 +20,6 @@ class Namer {
 
 const nameroo = new Namer('Balls');
 console.log(nameroo.name)
-
-
 
 
 // comment
@@ -55,7 +46,8 @@ const app = express();
 app.use('/web', express.static('public'))
 
 app.get('/', function (req, res) {
-  res.send('Hello world\n');
+  const xs = from(['a', 'b', 'c']).subscribe(x => res.send(x));
+  return xs;
 });
 
 
