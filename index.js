@@ -21,6 +21,8 @@ class Namer {
 const nameroo = new Namer('Balls');
 console.log(nameroo.name)
 
+const bobby = 'Cheese';
+
 
 // comment
 // Constants
