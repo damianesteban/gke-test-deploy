@@ -14,7 +14,8 @@ class Namer {
   }
   // also called from the constructor
 
-  set name() {
+  set name(name) {
+    this.name = name;
     this.#isNameSet = true;
   }
 }
