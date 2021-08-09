@@ -12,6 +12,7 @@ class Namer {
   get name() {
     return this.#name;
   }
+  // also called from the constructor
 
   set name() {
     this.#isNameSet = true;
