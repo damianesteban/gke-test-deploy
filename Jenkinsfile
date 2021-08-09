@@ -67,7 +67,8 @@ pipeline {
                 rtPromote (
                     serverId: artifactoryServerId,
                     targetRepo: artifactoryPromotedRepository,
-                    sourceRepo: artifactoryRepository
+                    sourceRepo: artifactoryRepository,
+                    targetTag: "staging-${shortCommit}"
                 )
             }
         }
