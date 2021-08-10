@@ -4,7 +4,7 @@ ENV NODE_ENV="production"
 # Copy app's source code to the /app directory
 WORKDIR /app
 
-COPY package.json yarn.lock .yarnrc.yml .yarn ./
+COPY package.json yarn.lock .yarnrc .yarn ./
 COPY . /app
 
 # The application's directory will be the working directory
