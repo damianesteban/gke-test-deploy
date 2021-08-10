@@ -4,6 +4,12 @@ const express = require('express');
 
 
 
+class Dude {
+  #name = 'Dude';
+}
+
+
+
 const thing = 1;
 
 
