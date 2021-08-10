@@ -6,6 +6,8 @@ const thing = 1;
 
 
 
+
+
 class Namer {
   #name;
   #isNameSet;
