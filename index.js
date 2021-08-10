@@ -2,8 +2,6 @@
 const express = require('express');
 
 
-
-
 const thing = 1;
 
 
