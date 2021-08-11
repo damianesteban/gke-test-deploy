@@ -12,21 +12,6 @@ class Dude {
   #name = 'Dude';
 }
 
-
-
-
-
-
-
-
-const thing = 1;
-
-
-
-
-
-
-
 class Namer {
   #name;
   #isNameSet;
@@ -42,6 +27,7 @@ class Namer {
 
   set name(name) {
     this.name = name;
+    console.log('I just set this shit!');
     this.#isNameSet = true;
   }
 }
@@ -63,6 +49,8 @@ app.use('/web', express.static('public'))
 app.get('/', function (req, res) {
   res.send({ good: true }).status(200);
 });
+
+
 
 app.listen(PORT);
 console.log('Running on http://localhost:' + PORT, '0.0.0.0');
