@@ -12,9 +12,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "csv-parser": "^3.0.0",
     "express": "^4.17.1",
     "fp-ts": "^2.11.1",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "semantic-release": "^17.4.4"
   },
   "devDependencies": {
