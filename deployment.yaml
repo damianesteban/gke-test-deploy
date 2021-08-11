@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp
+  annotations:
+    keel.sh/policy: "force"
 spec:
   replicas: 2
   selector:
@@ -14,12 +16,12 @@ spec:
     spec:
       containers:
         - name: webapp
-          image: bhc.jfrog.io/docker-development-local/webapp:latest
+          image: betterpt/keelapp:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
       imagePullSecrets:
-        - name: docker-creds 
+        - name: dockerhub-creds 
 ---
 apiVersion: v1
 kind: Service
