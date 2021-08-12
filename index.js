@@ -1,13 +1,6 @@
 'use strict';
 const express = require('express');
-
-
-
-
-
-
-
-
+const { getFoldableWithIndexComposition } = require('fp-ts/lib/FoldableWithIndex');
 class Dude {
   #name = 'Dude';
 }
@@ -32,6 +25,7 @@ class Namer {
   }
 }
 
+
 const nameroo = new Namer('Balls');
 console.log(nameroo.name)
 
@@ -42,24 +36,16 @@ const name = 'd';
 console.log('NAME: ', name);
 
 
-
-
-
 // App
 const app = express();
 
 app.use('/web', express.static('public'))
 
-
 app.get('/', function (req, res) {
-  res.send({ good: true }).status(200);
+  res.send({ good: getFoldableWithIndexComposition }).status(200);
 });
 
-
-
-
 const g = 'd'
-
 
 app.listen(PORT);
 console.log('Running on http://localhost:' + PORT, '0.0.0.0');
