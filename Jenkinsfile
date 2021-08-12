@@ -44,21 +44,26 @@ pipeline {
         }
 
         // Pushes the image to the Artifactory server
-        stage('Push Image to Artifactory') {
+        stage('Push Versioned Image to Artifactory') {
             steps {
                 rtDockerPush(
                     serverId: artifactoryServerId,
                     image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${shortCommit}",
                     targetRepo: artifactoryDevelopmentRepository
                 )
-                
+
+            }
+        }
+
+        stage('Push latest Image to Artifactory') {
+            steps {
                 rtDockerPush(
                     serverId: artifactoryServerId,
                     image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":latest",
                     targetRepo: artifactoryDevelopmentRepository
                 )
-
             }
+
         }
 
         // Publishes the build info to Artifactory
