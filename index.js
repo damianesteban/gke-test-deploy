@@ -12,8 +12,8 @@ const doThing = (name) => {
 const doMoreThings = (name) => {
   const xs = [1, 2, 3, 4, 5, name];
   const cloneValue = _.reduce(xs, (acc, x) => {
-    return acc + x;
-  });
+  return acc + x;
+});
 
   console.log('CLONE: ', cloneValue);
   return cloneValue;
@@ -61,8 +61,9 @@ app.use('/web', express.static('public'))
 
 app.get('/', (req, res) => {
   const result = doThing('Sally');
+  const result2 = doMoreThings('Bally');
   const f = 'd';
-  res.send({ keeled: false, payload: result }).status(200);
+  res.send({ keeled: false, payload: result, payload2: result2 }).status(200);
 });
 
 const gg =- 'f';
