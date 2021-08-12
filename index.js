@@ -4,6 +4,10 @@ class Dude {
   #name = 'Dude';
 }
 
+
+
+
+const name = 's'
 class Namer {
   #name;
   #isNameSet;
