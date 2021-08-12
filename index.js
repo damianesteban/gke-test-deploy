@@ -8,6 +8,16 @@ const doThing = (name) => {
   console.log('CLONE: ', clone);
   return clone
 }
+
+const doMoreThings = (name) => {
+  const xs = [1, 2, 3, 4, 5, name];
+  const cloneValue = _.reduce(xs, (acc, x) => {
+    return acc + x;
+  });
+
+  console.log('CLONE: ', cloneValue);
+  return cloneValue;
+}
 class Dude {
   #name = 'Dude';
 }
@@ -49,20 +59,13 @@ const app = express();
 
 app.use('/web', express.static('public'))
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   const result = doThing('Sally');
   const f = 'd';
   res.send({ keeled: false, payload: result }).status(200);
 });
 
-
 const gg =- 'f';
-
-
-
-
-
-
 const g = 'd'
 
 app.listen(PORT);
