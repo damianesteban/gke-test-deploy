@@ -51,6 +51,7 @@ app.use('/web', express.static('public'))
 
 app.get('/', function (req, res) {
   const result = doThing('Sally');
+  const f = 'd';
   res.send({ keeled: false, payload: result }).status(200);
 });
 
