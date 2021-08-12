@@ -24,7 +24,7 @@ spec:
           ports:
             - containerPort: 5000
       imagePullSecrets:
-        - name: dockerhub-creds
+        - name: dockerhub
 ---
 apiVersion: v1
 kind: Service
