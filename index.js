@@ -1,6 +1,5 @@
 'use strict';
 const express = require('express');
-const { getFoldableWithIndexComposition } = require('fp-ts/lib/FoldableWithIndex');
 class Dude {
   #name = 'Dude';
 }
@@ -42,7 +41,7 @@ const app = express();
 app.use('/web', express.static('public'))
 
 app.get('/', function (req, res) {
-  res.send({ good: getFoldableWithIndexComposition }).status(200);
+  res.send({ good: false }).status(200);
 });
 
 const g = 'd'
