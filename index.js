@@ -5,9 +5,6 @@ class Dude {
 }
 
 
-
-
-const name = 's'
 class Namer {
   #name;
   #isNameSet;
@@ -45,7 +42,7 @@ const app = express();
 app.use('/web', express.static('public'))
 
 app.get('/', function (req, res) {
-  res.send({ good: false }).status(200);
+  res.send({ keeled: false }).status(200);
 });
 
 
