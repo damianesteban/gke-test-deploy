@@ -1,5 +1,13 @@
 'use strict';
 const express = require('express');
+const _ = require('lodash');
+
+const doThing = (name) => {
+  const xs = [1, 2, 3, 4, 5, name];
+  const clone = _.cloneDeep(xs);
+  console.log('CLONE: ', clone);
+  return clone
+}
 class Dude {
   #name = 'Dude';
 }
@@ -42,7 +50,8 @@ const app = express();
 app.use('/web', express.static('public'))
 
 app.get('/', function (req, res) {
-  res.send({ keeled: false }).status(200);
+  const result = doThing('Sally');
+  res.send({ keeled: false, payload: result }).status(200);
 });
 
 
