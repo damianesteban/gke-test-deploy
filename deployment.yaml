@@ -23,8 +23,6 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
-      imagePullSecrets:
-        - name: dockerhub
 ---
 apiVersion: v1
 kind: Service
