@@ -4964,6 +4964,11 @@ pacote@^11.1.11, pacote@^11.2.6, pacote@^11.3.0, pacote@^11.3.1, pacote@^11.3.5:
     ssri "^8.0.1"
     tar "^6.1.0"
 
+papaparse@^5.3.1:
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.3.1.tgz#770b7a9124d821d4b2132132b7bd7dce7194b5b1"
+  integrity sha512-Dbt2yjLJrCwH2sRqKFFJaN5XgIASO9YOFeFP8rIBRG2Ain8mqk5r1M6DkfvqEVozVcz3r3HaUGw253hA1nLIcA==
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -5226,6 +5231,11 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
+ramda@^0.27.1:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.1.tgz#66fc2df3ef873874ffc2da6aa8984658abacf5c9"
+  integrity sha512-PgIdVpn5y5Yns8vqb8FzBUEYn98V3xcPgawAkkgj0YJ0qDsnHCiNmZYfOGMgOvoB0eWFLpYbhxUR3mxfDIMvpw==
+
 range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
@@ -5390,6 +5400,11 @@ require-directory@^2.1.1:
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
 
+rereadable-stream@^1.4.12:
+  version "1.4.12"
+  resolved "https://registry.yarnpkg.com/rereadable-stream/-/rereadable-stream-1.4.12.tgz#51d375d3eb7f4708a4bb592d057d4858502defd9"
+  integrity sha512-X6DO4q5q+QWIKP/B3MO+W0fNlu7x2xJDYvZ6LqM3kSFtyRp/0E/W1NOoxg5Zp9gUB0kKTFXUiubhxgb/c+tZEw==
+
 resolve-cwd@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-3.0.0.tgz#0f0075f1bb2544766cf73ba6a6e2adfebcb13f2d"
@@ -5517,6 +5532,20 @@ saxes@^5.0.1:
   integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
   dependencies:
     xmlchars "^2.2.0"
+
+scramjet-core@^4.31.19:
+  version "4.31.19"
+  resolved "https://registry.yarnpkg.com/scramjet-core/-/scramjet-core-4.31.19.tgz#ac69687c792abae40ab1a4bedc2cdca7a1f814ec"
+  integrity sha512-/rmtiNw7CY2xLKCm7qBc7RwToltdZ+0MpLaS7XCdPAjMwheKT3+Jbu/r708DryySQypy2IKJQkUx5kx7b2qkeg==
+
+scramjet@^4.35.20:
+  version "4.35.20"
+  resolved "https://registry.yarnpkg.com/scramjet/-/scramjet-4.35.20.tgz#acce89a4d4419af3b8dd0d5dde95eaef2d839665"
+  integrity sha512-Lnj3Js/y07VsaQM2vhMkNHl51jRHucnpAOPE55Ug3B6mo3CtPdO+DEpCsaV97u0ZBXcxWIbR9DN4SPftcAprDw==
+  dependencies:
+    papaparse "^5.3.1"
+    rereadable-stream "^1.4.12"
+    scramjet-core "^4.31.19"
 
 secure-json-parse@^2.0.0:
   version "2.4.0"
