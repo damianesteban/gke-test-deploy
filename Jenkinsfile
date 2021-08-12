@@ -50,7 +50,12 @@ pipeline {
                     serverId: artifactoryServerId,
                     image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${shortCommit}",
                     targetRepo: artifactoryDevelopmentRepository
+                )rtDockerPush(
+                    serverId: artifactoryServerId,
+                    image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":latest",
+                    targetRepo: artifactoryDevelopmentRepository
                 )
+
             }
         }
 
