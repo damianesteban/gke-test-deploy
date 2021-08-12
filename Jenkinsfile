@@ -102,12 +102,12 @@ pipeline {
             }
         }
 
-        // stage('Deploy') {
-        //     steps {
-        //          sh "sed -i 's/webapp:latest/webapp:${shortCommit}/g' deployment.yaml"
-        //          sh "cat deployment.yaml"
-        //         step([$class: 'KubernetesEngineBuilder', projectId: 'wompy-318104', clusterName: 'silly-cluster', location: 'us-east1-d', manifestPattern: 'deployment.yaml', credentialsId: 'gke', verifyDeployments: true])
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                 sh "sed -i 's/webapp:latest/webapp:${shortCommit}/g' deployment.yaml"
+                 sh "cat deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: 'wompy-318104', clusterName: 'silly-cluster', location: 'us-east1-d', manifestPattern: 'deployment.yaml', credentialsId: 'gke', verifyDeployments: true])
+            }
+        }
     }
 }
