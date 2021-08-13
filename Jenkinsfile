@@ -1,4 +1,5 @@
 def gitTag = null
+def imageTag = null
 def artifactoryServerId = 'artifactory-server'
 def artifactoryServerUrl = 'https://bhc.jfrog.io/artifactory'
 def artifactoryServerCredentialsId = 'artifactory-lp'
@@ -13,7 +14,6 @@ pipeline {
     agent any
     environment {
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
-        tag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
     }
 
     stages {
@@ -24,7 +24,22 @@ pipeline {
                 script {
                     gitTag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                     echo "GIT TAG: ${gitTag}"
+                    imageTag = gitTag + "-" + shortCommit
+                    ECHO: "FULL IMAGE TAG: ${imageTag}"
                 }
+            }
+        }
+
+        stage("If tagged") { 
+            when {
+                expression {
+                    return gitTag
+                }
+            }
+            steps {
+                echo "TAGGED BUILD IS PRESENT"
+                // * TODO: What should we do here?
+                // See this discussion: https://stackoverflow.com/questions/37488178/jenkinsfile-get-current-tag
             }
         }
 
@@ -43,7 +58,7 @@ pipeline {
         stage('Build docker image') {
             steps {
                 script {
-                    docker.build(artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${shortCommit}")
+                    docker.build(artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}")
                 }
             }
         }
@@ -53,7 +68,7 @@ pipeline {
             steps {
                 rtDockerPush(
                     serverId: artifactoryServerId,
-                    image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${shortCommit}",
+                    image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}",
                     targetRepo: artifactoryDevelopmentRepository
                 )
 
@@ -90,7 +105,7 @@ pipeline {
         //     }
         // }
 
-        // Promotion Step. This removes the image from the development docker repo and pushesd it to the staging docker repo.
+        // Promotion Step. This removes the image from the development docker repo and pushes it to the staging docker repo.
         // There can also be a manual promotion step here.
         stage ('Promotion') {
             steps {
