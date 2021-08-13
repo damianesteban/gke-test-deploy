@@ -34,7 +34,10 @@ class Namer {
   get name() {
     return this.#name;
   }
-  // also called from the constructor
+
+  get isNameSet() {
+    return this.#isNameSet;
+  }
 
   set name(name) {
     this.name = name;
@@ -42,7 +45,6 @@ class Namer {
     this.#isNameSet = true;
   }
 }
-
 
 const nameroo = new Namer('Balls');
 console.log(nameroo.name)
@@ -66,10 +68,13 @@ app.get('/', (req, res) => {
   res.send({ keeled: 'maybe', payload: result, payload2: result2 }).status(200);
 });
 
-
+console.log('Running on http://localhost:' + PORT, '0.0.0.0');
 
 const gg =- 'f';
 const g = 'd'
 
-app.listen(PORT);
-console.log('Running on http://localhost:' + PORT, '0.0.0.0');
+app.listen(PORT, () => {
+  console.log('Server is running on port', PORT)
+
+});
+
