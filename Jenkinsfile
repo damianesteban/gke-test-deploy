@@ -1,3 +1,4 @@
+def gitTag = null
 def artifactoryServerId = 'artifactory-server'
 def artifactoryServerUrl = 'https://bhc.jfrog.io/artifactory'
 def artifactoryServerCredentialsId = 'artifactory-lp'
@@ -20,6 +21,10 @@ pipeline {
         stage("Checkout code") {
             steps {
                 checkout scm
+                script {
+                    gitTag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
+                    echo "GIT TAG: ${gitTag}"
+                }
             }
         }
 
@@ -102,12 +107,12 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                 sh "sed -i 's/webapp:latest/webapp:${shortCommit}/g' deployment.yaml"
-                 sh "cat deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: 'wompy-318104', clusterName: 'silly-cluster', location: 'us-east1-d', manifestPattern: 'deployment.yaml', credentialsId: 'gke', verifyDeployments: true])
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //          sh "sed -i 's/webapp:latest/webapp:${shortCommit}/g' deployment.yaml"
+        //          sh "cat deployment.yaml"
+        //         step([$class: 'KubernetesEngineBuilder', projectId: 'wompy-318104', clusterName: 'silly-cluster', location: 'us-east1-d', manifestPattern: 'deployment.yaml', credentialsId: 'gke', verifyDeployments: true])
+        //     }
+        // }
     }
 }
