@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
   const result = doThing('Sally');
   const result2 = doMoreThings('Bally');
   const f = 'd';
-  res.send({ keeled: false, payload: result, payload2: result2 }).status(200);
+  res.send({ keeled: 'maybe', payload: result, payload2: result2 }).status(200);
 });
 
 const gg =- 'f';
