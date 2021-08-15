@@ -25,7 +25,7 @@ pipeline {
                     gitTag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                     echo "GIT TAG: ${gitTag}"
                     imageTag = gitTag + "-" + shortCommit
-                    ECHO: "FULL IMAGE TAG: ${imageTag}"
+                    echo "FULL IMAGE TAG: ${imageTag}"
                 }
             }
         }
