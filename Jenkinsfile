@@ -3,6 +3,8 @@ def imageTag = null
 def artifactoryServerId = 'artifactory-server'
 def artifactoryServerUrl = 'https://bhc.jfrog.io/artifactory'
 def artifactoryServerCredentialsId = 'artifactory-lp'
+
+// ! NOTE: These should be ENV vatiables, i.e. "docker-${env.Stage}-local"
 def artifactoryDevelopmentRepository = 'docker-development-local'
 def artifactoryStagingRepository = 'docker-staging-local'
 def artifactoryProductionRepository = 'docker-production-local'
@@ -13,6 +15,7 @@ pipeline {
 
     agent any
     environment {
+        // Grabs the 
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
     }
 
@@ -63,8 +66,8 @@ pipeline {
             }
         }
 
-        // Example of Image Verification
-        // NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
+        // ! NOTE: Example of Image Verification
+        // ! NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
         // stage('Image Verification') {
         //     steps {
         //         script {
@@ -115,7 +118,7 @@ pipeline {
         // }
 
         // Promotion Step. This removes the image from the development docker repo and pushes it to the staging docker repo.
-        // Manual promotion seems to work, but it does not fire off a webhook.
+        // Manual promotion seems to work, but it does not fire off a webhook when it is promoted to staging.
         stage ('Promotion') {
             steps {
                 rtPromote (
@@ -131,6 +134,7 @@ pipeline {
             }
         }
 
+        // ! NOTE: Deployment is with Helm, this is just a placeholder
         // stage('Deploy') {
         //     steps {
         //          sh "sed -i 's/webapp:latest/webapp:${shortCommit}/g' deployment.yaml"
