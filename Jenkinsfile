@@ -28,6 +28,7 @@ pipeline {
             }
         }
 
+        // Sets the image tag based on the git tag
         stage("Determine if image is tagged") {
             steps {
                 script {
@@ -40,9 +41,7 @@ pipeline {
                     }
                 }
             }
-
         }
-
 
         // Configures the Artifactory server
         stage('Artifactory configuration') {
@@ -64,6 +63,16 @@ pipeline {
             }
         }
 
+        // Example of Image Verification
+        // NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
+        // stage('Image Verification') {
+        //     steps {
+        //         script {
+        //             sh(returnStdout: true, script: "dgoss run -p 5000:5000 /docker-development-local/" + imageName + ":${imageTag}")  
+        //       }
+        //     }
+        // }
+        
         // Pushes the image to the Artifactory server
         stage('Push Versioned Image to Artifactory') {
             steps {
@@ -84,7 +93,6 @@ pipeline {
                     targetRepo: artifactoryDevelopmentRepository
                 )
             }
-
         }
 
         // Publishes the build info to Artifactory
@@ -107,19 +115,19 @@ pipeline {
         // }
 
         // Promotion Step. This removes the image from the development docker repo and pushes it to the staging docker repo.
-        // There can also be a manual promotion step here.
+        // Manual promotion seems to work, but it does not fire off a webhook.
         stage ('Promotion') {
             steps {
-                // rtPromote (
-                //     serverId: artifactoryServerId,
-                //     targetRepo: artifactoryStagingRepository,
-                //     sourceRepo: artifactoryDevelopmentRepository
-                // )
-                rtAddInteractivePromotion(
+                rtPromote (
                     serverId: artifactoryServerId,
                     targetRepo: artifactoryStagingRepository,
                     sourceRepo: artifactoryDevelopmentRepository
                 )
+                // rtAddInteractivePromotion(
+                //     serverId: artifactoryServerId,
+                //     targetRepo: artifactoryStagingRepository,
+                //     sourceRepo: artifactoryDevelopmentRepository
+                // )
             }
         }
 
