@@ -24,7 +24,6 @@ pipeline {
                 script {
                     gitTag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                     echo "GIT TAG: ${gitTag}"
-
                 }
             }
         }
@@ -34,10 +33,10 @@ pipeline {
                 script {
                     if (gitTag != null) {
                         imageTag = gitTag + "-" + shortCommit
-                        echo "FULL IMAGE TAG: ${imageTag}"
+                        echo "FULL IMAGE TAG, TAG PRESENT: ${imageTag}"
                     } else {
-                        imageTag = "no-tag""-" + shortCommit
-                        echo "FULL IMAGE TAG: ${imageTag}"
+                        imageTag = "no-tag" + "-" + shortCommit
+                        echo "FULL IMAGE TAG, NO TAG PRESENT: ${imageTag}"
                     }
                 }
             }
