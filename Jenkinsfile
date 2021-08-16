@@ -31,7 +31,7 @@ pipeline {
         stage("Determine if image is tagged") {
             steps {
                 script {
-                    if (gitTag != null) {
+                    if (gitTag != "") {
                         imageTag = gitTag + "-" + shortCommit
                         echo "FULL IMAGE TAG, TAG PRESENT: ${imageTag}"
                     } else {
