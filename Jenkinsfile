@@ -24,24 +24,26 @@ pipeline {
                 script {
                     gitTag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                     echo "GIT TAG: ${gitTag}"
-                    imageTag = gitTag + "-" + shortCommit
-                    echo "FULL IMAGE TAG: ${imageTag}"
+
                 }
             }
         }
 
-        stage("If tagged") { 
-            when {
-                expression {
-                    return gitTag
+        stage("Determine if image is tagged") {
+            steps {
+                script {
+                    if (gitTag != null) {
+                        imageTag = gitTag + "-" + shortCommit
+                        echo "FULL IMAGE TAG: ${imageTag}"
+                    } else {
+                        imageTag = "no-tag""-" + shortCommit
+                        echo "FULL IMAGE TAG: ${imageTag}"
+                    }
                 }
             }
-            steps {
-                echo "TAGGED BUILD IS PRESENT"
-                // * TODO: What should we do here?
-                // See this discussion: https://stackoverflow.com/questions/37488178/jenkinsfile-get-current-tag
-            }
+
         }
+
 
         // Configures the Artifactory server
         stage('Artifactory configuration') {
