@@ -41,6 +41,12 @@ pipeline {
             }
         }
 
+        stage("Run application tests") {
+            steps {
+                sh 'yarn install && yarn test'
+            }
+        }
+
         // Sets the image tag based on the git tag
         stage("Determine if image is tagged") {
             steps {
