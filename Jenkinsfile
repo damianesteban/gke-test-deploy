@@ -16,6 +16,7 @@ pipeline {
     agent any
 
     tools { nodejs "node" }
+
     environment {
         // Grabs the 
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
@@ -26,13 +27,13 @@ pipeline {
 
     stages {
 
-        stage("Check npm") {
+        stage("Check yarn install") {
             steps {
                 sh "yarn versions"
             }
         }
 
-        stage("Checkout code") {
+        stage("Checkout code from git") {
             steps {
                 checkout scm
                 script {
@@ -71,9 +72,11 @@ pipeline {
 
         stage("Push image to registry") {  
             steps {
-                docker.withRegistry('', 'dockerhub-creds') {
-                    dockerImage.push("${imageTag}")
-                    dockerImage.push("latest")
+                script {
+                    docker.withRegistry('', 'dockerhub-creds') {
+                        dockerImage.push("${imageTag}")
+                        dockerImage.push("latest")
+                    }
                 }
             }
         }
