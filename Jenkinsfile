@@ -51,7 +51,7 @@ pipeline {
         }
 
         // Sets the image tag based on the git tag and git commit hash
-        stage("Determine if image is tagged") {
+        stage("Tag the image") {
             steps {
                 script {
                     if (gitTag != "") {
@@ -72,6 +72,14 @@ pipeline {
                     dockerImage = docker.build "${developmentRepository}/${imageApplicationName}:${imageTag}"
                 }
                 
+            }
+        }
+
+        stage('Application Testing') {
+            steps {
+                dockerImage.inside {
+                    sh 'yarn test'
+                }
             }
         }
 
