@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const _ = require('lodash');
+const dataStore = require('./db');
 
 const doThing = (name) => {
   const xs = [1, 2, 3, 4, 5, name];
@@ -34,8 +35,9 @@ app.get('/', (req, res) => {
   const result = doThing('Sally');
   const result2 = doMoreThings('Bally');
   const result3 = doEvenMoreThings('Bally');
-  const f = 'd';
-  res.send({ payload1: 'maybe', payload: result, payload2: result2, payload3: result3 }).status(200);
+  const compositeResult = [result, result2, result3];
+  datastore.data = compositeResult;
+  res.send({ data: dataStore.data }).status(200);
 });
 
 console.log('Running on http://localhost:' + PORT, '0.0.0.0');
