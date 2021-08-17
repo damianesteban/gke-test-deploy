@@ -86,6 +86,7 @@ pipeline {
         //     }
         // }
         
+        
         // Pushes the image to the Artifactory server
         stage('Push Versioned Image to Artifactory') {
             steps {
