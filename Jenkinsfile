@@ -1,20 +1,19 @@
+library('jenkins-devops-libs')
+
 def gitTag = null
 def imageTag = null
-def artifactoryServerId = 'artifactory-server'
-def artifactoryServerUrl = 'https://bhc.jfrog.io/artifactory'
-def artifactoryServerCredentialsId = 'artifactory-lp'
 
-// ! NOTE: These should be ENV vatiables, i.e. "docker-${env.Stage}-local"
-def artifactoryDevelopmentRepository = 'docker-development-local'
-def artifactoryStagingRepository = 'docker-staging-local'
-def artifactoryProductionRepository = 'docker-production-local'
+def developmentRepository = 'betterptdev'
+def stagingRepository = 'betterptstaging'
+def productionRepository = 'betterptproduction'
 def artifactoryDockerRegistry = 'bhc.jfrog.io'
-def imageName = 'betterptdev/webapp'
+def imageApplicationName = 'webapp'
 
 pipeline {
 
     agent any
 
+    // nodejs plugin
     tools { nodejs "node" }
 
     environment {
@@ -26,13 +25,14 @@ pipeline {
     }
 
     stages {
-
+        // Verify yarn is installed
         stage("Check yarn install") {
             steps {
                 sh "yarn versions"
             }
         }
 
+        // Checkout code from git and get git tag
         stage("Checkout code from git") {
             steps {
                 checkout scm
@@ -43,13 +43,14 @@ pipeline {
             }
         }
 
+        // Runs applicaion tests
         stage("Run application tests") {
             steps {
                 sh 'yarn install && yarn test'
             }
         }
 
-        // Sets the image tag based on the git tag
+        // Sets the image tag based on the git tag and git commit hash
         stage("Determine if image is tagged") {
             steps {
                 script {
@@ -64,15 +65,17 @@ pipeline {
             }
         }
 
+        // Builds the docker image
         stage("Build image") {
             steps {
                 script {
-                    dockerImage = docker.build imageName
+                    dockerImage = docker.build "${developmentRepository}/${imageApplicationName}"
                 }
                 
             }
         }
 
+        // Pushes the image to the registry twice - once with the latest tag and once with the image tag
         stage("Push image to registry") {  
             steps {
                 script {
@@ -83,92 +86,14 @@ pipeline {
                 }
             }
         }
-        // // Configures the Artifactory server
-        // stage('Artifactory configuration') {
-        //     steps {
-        //         rtServer(
-        //             id: artifactoryServerId,
-        //             url: artifactoryServerUrl,
-        //             credentialsId: artifactoryServerCredentialsId
-        //         )
-        //     }
-        // }
-
-        // // Builds the image. Of coure we don't need to use the Artifactory methods here if we don't want to
-        // stage('Build docker image') {
-        //     steps {
-        //         script {
-        //             docker.build(artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}")
-        //         }
-        //     }
-        // }
 
         // ! NOTE: Example of Image Verification
         // ! NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
         // stage('Image Verification') {
         //     steps {
         //         script {
-        //             sh(returnStdout: true, script: "dgoss run -p 5000:5000 /docker-development-local/" + imageName + ":${imageTag}")  
+        //             sh(returnStdout: true, script: "dgoss run -p 5000:5000 /docker-development-local/" + imagename + ":${imageTag}")  
         //       }
-        //     }
-        // }
-        
-
-        // Pushes the image to the Artifactory server
-        // stage('Push Versioned Image to Artifactory') {
-        //     steps {
-        //         rtDockerPush(
-        //             serverId: artifactoryServerId,
-        //             image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}",
-        //             targetRepo: artifactoryDevelopmentRepository
-        //         )
-
-        //     }
-        // }
-
-        // stage('Push latest Image to Artifactory') {
-        //     steps {
-        //         rtDockerPush(
-        //             serverId: artifactoryServerId,
-        //             image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":latest",
-        //             targetRepo: artifactoryDevelopmentRepository
-        //         )
-        //     }
-        // }
-
-        // // Publishes the build info to Artifactory
-        // stage('Publish build info') {
-        //     steps {
-        //         rtPublishBuildInfo(
-        //             serverId: artifactoryServerId
-        //         )
-        //     }
-        // }
-
-        // ! NOTE: We don't have Xray Scan with the free version.
-        // stage('Xray scan') {
-        //     steps {
-        //         xrayScan(
-        //             serverId: artifactoryServerId,
-        //             failBuild: true
-        //         )
-        //     }
-        // }
-
-        // Promotion Step. This removes the image from the development docker repo and pushes it to the staging docker repo.
-        // Manual promotion seems to work, but it does not fire off a webhook when it is promoted to staging.
-        // stage ('Promotion') {
-        //     steps {
-        //         // rtPromote (
-        //         //     serverId: artifactoryServerId,
-        //         //     targetRepo: artifactoryStagingRepository,
-        //         //     sourceRepo: artifactoryDevelopmentRepository
-        //         // )
-        //         rtAddInteractivePromotion(
-        //             serverId: artifactoryServerId,
-        //             targetRepo: artifactoryStagingRepository,
-        //             sourceRepo: artifactoryDevelopmentRepository
-        //         )
         //     }
         // }
 
