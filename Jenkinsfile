@@ -9,7 +9,7 @@ def artifactoryDevelopmentRepository = 'docker-development-local'
 def artifactoryStagingRepository = 'docker-staging-local'
 def artifactoryProductionRepository = 'docker-production-local'
 def artifactoryDockerRegistry = 'bhc.jfrog.io'
-def imageName = 'webapp'
+def imageName = 'betterptdev/webapp'
 
 pipeline {
 
@@ -21,6 +21,7 @@ pipeline {
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
         GH_TOKEN = credentials('github-token')
         NPM_TOKEN = credentials('npm-token')
+        dockerImage = ""
     }
 
     stages {
@@ -62,25 +63,39 @@ pipeline {
             }
         }
 
-        // Configures the Artifactory server
-        stage('Artifactory configuration') {
+        stage("Build image") {
             steps {
-                rtServer(
-                    id: artifactoryServerId,
-                    url: artifactoryServerUrl,
-                    credentialsId: artifactoryServerCredentialsId
-                )
+                dockerImage = docker.build imageName
             }
         }
 
-        // Builds the image. Of coure we don't need to use the Artifactory methods here if we don't want to
-        stage('Build docker image') {
+        stage("Push image to registry") {  
             steps {
-                script {
-                    docker.build(artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}")
+                docker.withRegistry('', 'dockerhub-creds') {
+                    dockerImage.push("${imageTag}")
+                    dockerImage.push("latest")
                 }
             }
         }
+        // // Configures the Artifactory server
+        // stage('Artifactory configuration') {
+        //     steps {
+        //         rtServer(
+        //             id: artifactoryServerId,
+        //             url: artifactoryServerUrl,
+        //             credentialsId: artifactoryServerCredentialsId
+        //         )
+        //     }
+        // }
+
+        // // Builds the image. Of coure we don't need to use the Artifactory methods here if we don't want to
+        // stage('Build docker image') {
+        //     steps {
+        //         script {
+        //             docker.build(artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}")
+        //         }
+        //     }
+        // }
 
         // ! NOTE: Example of Image Verification
         // ! NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
@@ -94,35 +109,35 @@ pipeline {
         
 
         // Pushes the image to the Artifactory server
-        stage('Push Versioned Image to Artifactory') {
-            steps {
-                rtDockerPush(
-                    serverId: artifactoryServerId,
-                    image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}",
-                    targetRepo: artifactoryDevelopmentRepository
-                )
+        // stage('Push Versioned Image to Artifactory') {
+        //     steps {
+        //         rtDockerPush(
+        //             serverId: artifactoryServerId,
+        //             image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":${imageTag}",
+        //             targetRepo: artifactoryDevelopmentRepository
+        //         )
 
-            }
-        }
+        //     }
+        // }
 
-        stage('Push latest Image to Artifactory') {
-            steps {
-                rtDockerPush(
-                    serverId: artifactoryServerId,
-                    image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":latest",
-                    targetRepo: artifactoryDevelopmentRepository
-                )
-            }
-        }
+        // stage('Push latest Image to Artifactory') {
+        //     steps {
+        //         rtDockerPush(
+        //             serverId: artifactoryServerId,
+        //             image: artifactoryDockerRegistry + "/docker-development-local/" + imageName + ":latest",
+        //             targetRepo: artifactoryDevelopmentRepository
+        //         )
+        //     }
+        // }
 
-        // Publishes the build info to Artifactory
-        stage('Publish build info') {
-            steps {
-                rtPublishBuildInfo(
-                    serverId: artifactoryServerId
-                )
-            }
-        }
+        // // Publishes the build info to Artifactory
+        // stage('Publish build info') {
+        //     steps {
+        //         rtPublishBuildInfo(
+        //             serverId: artifactoryServerId
+        //         )
+        //     }
+        // }
 
         // ! NOTE: We don't have Xray Scan with the free version.
         // stage('Xray scan') {
