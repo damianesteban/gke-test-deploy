@@ -76,6 +76,16 @@ pipeline {
             }
         }
 
+        // ! NOTE: Example of Image Verification
+        // ! NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
+        stage('Image Verification') {
+            steps {
+                script {
+                    sh(returnStdout: true, script: "dgoss run -p 5000:5000 ${dockerImage}")  
+              }
+            }
+        }
+
         // Pushes the image to the registry twice - once with the latest tag and once with the image tag
         stage("Push image to registry") {  
             steps {
@@ -87,16 +97,6 @@ pipeline {
                 }
             }
         }
-
-        // ! NOTE: Example of Image Verification
-        // ! NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
-        // stage('Image Verification') {
-        //     steps {
-        //         script {
-        //             sh(returnStdout: true, script: "dgoss run -p 5000:5000 /docker-development-local/" + imagename + ":${imageTag}")  
-        //       }
-        //     }
-        // }
 
         // ! NOTE: Deployment is with Helm, this is just a placeholder
         // stage('Deploy') {
