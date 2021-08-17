@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
   const result2 = doMoreThings('Bally');
   const result3 = doEvenMoreThings('Bally');
   const compositeResult = [result, result2, result3];
-  datastore.data = compositeResult;
+  dataStore.data = compositeResult;
   res.send({ data: dataStore.data }).status(200);
 });
 
