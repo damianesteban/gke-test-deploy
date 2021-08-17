@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Damian Esteban",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "yarn node index.js",
     "commit": "git-cz",
