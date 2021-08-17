@@ -69,7 +69,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    dockerImage = docker.build "${developmentRepository}/${imageApplicationName}"
+                    dockerImage = docker.build "${developmentRepository}/${imageApplicationName}:${imageTag}"
                 }
                 
             }
@@ -80,7 +80,7 @@ pipeline {
         stage('Image Verification') {
             steps {
                 script {
-                    sh(returnStdout: true, script: "dgoss run -p 5000:5000 ${dockerImage}")  
+                    sh(returnStdout: true, script: "dgoss run -p 5000:5000 ${developmentRepository}/${imageApplicationName}:${imageTag}")  
               }
             }
         }
@@ -90,7 +90,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub') {
-                        dockerImage.push("${imageTag}")
+                        dockerImage.push()
                         dockerImage.push("latest")
                     }
                 }
