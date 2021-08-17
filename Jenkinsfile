@@ -86,7 +86,7 @@ pipeline {
         //     }
         // }
         
-        
+
         // Pushes the image to the Artifactory server
         stage('Push Versioned Image to Artifactory') {
             steps {
@@ -132,16 +132,16 @@ pipeline {
         // Manual promotion seems to work, but it does not fire off a webhook when it is promoted to staging.
         stage ('Promotion') {
             steps {
-                rtPromote (
-                    serverId: artifactoryServerId,
-                    targetRepo: artifactoryStagingRepository,
-                    sourceRepo: artifactoryDevelopmentRepository
-                )
-                // rtAddInteractivePromotion(
+                // rtPromote (
                 //     serverId: artifactoryServerId,
                 //     targetRepo: artifactoryStagingRepository,
                 //     sourceRepo: artifactoryDevelopmentRepository
                 // )
+                rtAddInteractivePromotion(
+                    serverId: artifactoryServerId,
+                    targetRepo: artifactoryStagingRepository,
+                    sourceRepo: artifactoryDevelopmentRepository
+                )
             }
         }
 
