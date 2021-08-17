@@ -1,9 +1,5 @@
 {
-  branches: [
-    { "name": "development", channel: "development" }, // Only after the `1.x` is created in the repo
-    { "name": "staging", "channel": "staging" }, // Only after the `2.x` is created in the repo
-    { "name": "master" },
-  ],
+  branches: ["development", "staging", "master"],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
