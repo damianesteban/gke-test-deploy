@@ -1,3 +1,10 @@
+# [3.23.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.22.0...v3.23.0) (2021-08-17)
+
+
+### Features
+
+* **add datastore:** adds a simple datastore to the application. It is so nice! ([79cc599](https://github.com/damianesteban/gke-test-deploy/commit/79cc599fd145c95c71075087c99fc6f36a87d5ef))
+
 # [3.22.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.21.0...v3.22.0) (2021-08-17)
 
 
