@@ -76,7 +76,7 @@ pipeline {
         stage("Push image to registry") {  
             steps {
                 script {
-                    docker.withRegistry('', 'dockerhub-creds') {
+                    docker.withRegistry('', 'dockerhub') {
                         dockerImage.push("${imageTag}")
                         dockerImage.push("latest")
                     }
@@ -157,20 +157,20 @@ pipeline {
 
         // Promotion Step. This removes the image from the development docker repo and pushes it to the staging docker repo.
         // Manual promotion seems to work, but it does not fire off a webhook when it is promoted to staging.
-        stage ('Promotion') {
-            steps {
-                // rtPromote (
-                //     serverId: artifactoryServerId,
-                //     targetRepo: artifactoryStagingRepository,
-                //     sourceRepo: artifactoryDevelopmentRepository
-                // )
-                rtAddInteractivePromotion(
-                    serverId: artifactoryServerId,
-                    targetRepo: artifactoryStagingRepository,
-                    sourceRepo: artifactoryDevelopmentRepository
-                )
-            }
-        }
+        // stage ('Promotion') {
+        //     steps {
+        //         // rtPromote (
+        //         //     serverId: artifactoryServerId,
+        //         //     targetRepo: artifactoryStagingRepository,
+        //         //     sourceRepo: artifactoryDevelopmentRepository
+        //         // )
+        //         rtAddInteractivePromotion(
+        //             serverId: artifactoryServerId,
+        //             targetRepo: artifactoryStagingRepository,
+        //             sourceRepo: artifactoryDevelopmentRepository
+        //         )
+        //     }
+        // }
 
         // ! NOTE: Deployment is with Helm, this is just a placeholder
         // stage('Deploy') {
