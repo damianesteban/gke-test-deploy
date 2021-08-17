@@ -1,3 +1,10 @@
+# [3.18.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.17.0...v3.18.0) (2021-08-17)
+
+
+### Features
+
+* **ff:** ff ([eb2df6c](https://github.com/damianesteban/gke-test-deploy/commit/eb2df6cf7cfee7189dbfaa0ebd96471949457ea9))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
