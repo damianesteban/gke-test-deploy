@@ -18,36 +18,6 @@ const doMoreThings = (name) => {
   console.log('CLONE: ', cloneValue);
   return cloneValue;
 }
-class Dude {
-  #name = 'Dude';
-}
-
-
-class Namer {
-  #name;
-  #isNameSet;
-
-  constructor(name) {
-    this.#name = name;  
-  }
-
-  get name() {
-    return this.#name;
-  }
-
-  get isNameSet() {
-    return this.#isNameSet;
-  }
-
-  set name(name) {
-    this.name = name;
-    console.log('I just set this shit!');
-    this.#isNameSet = true;
-  }
-}
-
-const nameroo = new Namer('Balls');
-console.log(nameroo.name)
 
 // Constants
 const PORT = process.env.PORT || 3000;
