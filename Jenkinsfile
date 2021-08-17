@@ -29,6 +29,7 @@ pipeline {
         stage("Check yarn install") {
             steps {
                 sh "yarn versions"
+                sh "dgoss"
             }
         }
 
