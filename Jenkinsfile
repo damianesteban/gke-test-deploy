@@ -13,9 +13,9 @@ def imageName = 'webapp'
 
 pipeline {
 
-    agent {
-        docker { image 'node:14' }
-    }
+    agent any
+
+    tools { nodejs "node" }
     environment {
         // Grabs the 
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
@@ -24,6 +24,12 @@ pipeline {
     }
 
     stages {
+
+        stage("Check npm") {
+            steps {
+                sh "yarn versions"
+            }
+        }
 
         stage("Checkout code") {
             steps {
