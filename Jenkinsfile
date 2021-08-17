@@ -13,10 +13,14 @@ def imageName = 'webapp'
 
 pipeline {
 
-    agent any
+    agent {
+        docker { image 'node:14-alpine' }
+    }
     environment {
         // Grabs the 
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
+        GH_TOKEN = credentials('github-token')
+        NPM_TOKEN = credentials('npm-token')
     }
 
     stages {

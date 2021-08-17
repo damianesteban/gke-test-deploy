@@ -1,8 +1,18 @@
 {
-  "branches": ["development", "staging", "master"],
+  branches: [
+    { "name": "development", channel: "development" }, // Only after the `1.x` is created in the repo
+    { "name": "staging", "channel": "staging" }, // Only after the `2.x` is created in the repo
+    { "name": "master" },
+  ],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    "@semantic-release/git"
+    [
+        "@semantic-release/git",
+        {
+          "assets": ["package.json", "package-lock.json", "CHANGELOG.md"],
+          "message": "chore(release): ${nextRelease.version} [from ci]\n\n${nextRelease.notes}"
+        }
+      ]
   ]
 }
