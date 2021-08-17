@@ -46,6 +46,8 @@ const g = 'd'
 
 const ggg = "fffffff";
 
+console.log(ggg);
+
 app.listen(PORT, () => {
   console.log('Server is running on port', PORT)
 });
