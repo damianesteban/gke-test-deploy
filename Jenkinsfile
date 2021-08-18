@@ -77,8 +77,10 @@ pipeline {
 
         stage('Application Testing') {
             steps {
-                dockerImage.inside {
-                    sh 'yarn test'
+                script {
+                    dockerImage.inside {
+                        sh 'yarn test'
+                    }
                 }
             }
         }
