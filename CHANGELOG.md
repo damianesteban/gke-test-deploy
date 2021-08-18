@@ -1,3 +1,10 @@
+## [3.23.4](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.3...v3.23.4) (2021-08-18)
+
+
+### Bug Fixes
+
+* remove file with name test ([4b0e31e](https://github.com/damianesteban/gke-test-deploy/commit/4b0e31ed496b61ac02ff088b92e71fed88e0dd9f))
+
 ## [3.23.3](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.2...v3.23.3) (2021-08-18)
 
 
