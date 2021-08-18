@@ -30,14 +30,12 @@ const app = express();
 
 app.use('/web', express.static('public'))
 
-
-
-
-
-
-
-
-
+const make = () => {
+  return {
+    name: 'John',
+    age: 25,
+  }
+}
 
 
 app.get('/', (req, res) => {
@@ -46,6 +44,7 @@ app.get('/', (req, res) => {
   const result3 = doEvenMoreThings('Bally');
   const compositeResult = [result, result2, result3];
   store.data = compositeResult;
+  console.log(make())
   res.send({ data: store.data }).status(200);
 });
 
