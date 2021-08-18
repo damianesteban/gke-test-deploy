@@ -4,7 +4,7 @@ class DataStore {
   #isDataSet
   
   constructor() {
-    this.#data = [];
+    this.#data = [{ name: 'Andrew' }, { name: 'Briana' }, { name: 'Cindy' }];
   }
 
   set data(data) {
