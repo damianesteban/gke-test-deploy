@@ -18,6 +18,5 @@ class DataStore {
 }
 
 const dataStore = new DataStore();
-Object.freeze(dataStore);
 
-module.exports = dataStore;
+module.exports =  { store: dataStore }
