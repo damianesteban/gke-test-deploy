@@ -1,3 +1,10 @@
+# [3.25.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.24.0...v3.25.0) (2021-08-18)
+
+
+### Features
+
+* add default data to database. Requested by Drew ([e9084c6](https://github.com/damianesteban/gke-test-deploy/commit/e9084c6350c01b194d3a01d35e7bd94f4e29332e))
+
 # [3.24.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.4...v3.24.0) (2021-08-18)
 
 
