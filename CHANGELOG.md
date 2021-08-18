@@ -1,3 +1,10 @@
+## [3.23.2](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.1...v3.23.2) (2021-08-18)
+
+
+### Bug Fixes
+
+* fix issue with test ([711c813](https://github.com/damianesteban/gke-test-deploy/commit/711c813e730244fb6557396881d2f8b0ae49a35d))
+
 ## [3.23.1](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.0...v3.23.1) (2021-08-17)
 
 
