@@ -6,10 +6,10 @@ def imageTag = null
 def developmentRepository = 'betterptdev'
 def stagingRepository = 'betterptstaging'
 def productionRepository = 'betterptproduction'
-def artifactoryDockerRegistry = 'bhc.jfrog.io'
 def imageApplicationName = 'webapp'
 
 pipeline {
+
 
     agent any
 
