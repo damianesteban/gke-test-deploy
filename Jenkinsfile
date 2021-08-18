@@ -86,7 +86,7 @@ pipeline {
         }
 
         // ! NOTE: Example of Image Verification
-        // ! NOTE: This step is commented out, goss needs to be installed on the Jenkins cluster
+        // ! NOTE: goss and dgoss need to installed on the host or in a container.
         stage('Image Verification') {
             steps {
                 script {
