@@ -1,3 +1,10 @@
+# [3.29.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.28.0...v3.29.0) (2021-08-18)
+
+
+### Features
+
+* add make method ([795046a](https://github.com/damianesteban/gke-test-deploy/commit/795046a998ade9c6bab91f6cc10628e60b0380a2))
+
 # [3.28.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.27.0...v3.28.0) (2021-08-18)
 
 
