@@ -1,3 +1,10 @@
+## [3.23.1](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.0...v3.23.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* fix issue with datastore setter ([fb18208](https://github.com/damianesteban/gke-test-deploy/commit/fb18208f48f2f8897769f5f9d2526439936b3246))
+
 # [3.23.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.22.0...v3.23.0) (2021-08-17)
 
 
