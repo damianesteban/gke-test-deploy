@@ -1,3 +1,10 @@
+## [3.23.3](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.2...v3.23.3) (2021-08-18)
+
+
+### Bug Fixes
+
+* fix docker image things ([15b5a47](https://github.com/damianesteban/gke-test-deploy/commit/15b5a47137cf9da25ed55e38d183295b63bca414))
+
 ## [3.23.2](https://github.com/damianesteban/gke-test-deploy/compare/v3.23.1...v3.23.2) (2021-08-18)
 
 
