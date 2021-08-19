@@ -1,3 +1,10 @@
+# [3.30.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.29.0...v3.30.0) (2021-08-19)
+
+
+### Features
+
+* **server:** add a sick and super cool console.log method to the listen method ([edeffd2](https://github.com/damianesteban/gke-test-deploy/commit/edeffd2c5927f2bd71e2a5a13eadb6dedd0ed390))
+
 # [3.29.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.28.0...v3.29.0) (2021-08-18)
 
 
