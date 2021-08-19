@@ -1,3 +1,10 @@
+# [3.31.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.30.0...v3.31.0) (2021-08-19)
+
+
+### Features
+
+* **docker:** add cache test ([db19455](https://github.com/damianesteban/gke-test-deploy/commit/db194552a50b20e5a4ea2ff19fa2577664124034))
+
 # [3.30.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.29.0...v3.30.0) (2021-08-19)
 
 
