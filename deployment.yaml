@@ -7,6 +7,8 @@ metadata:
     keel.sh/trigger: poll      
     keel.sh/approvals: "1"         
     keel.sh/pollSchedule: "@every 1m"
+    keel.sh/releaseNotes: "https://github.com/damianesteban/gke-test-deploy/releases"
+
 spec:
   replicas: 2
   selector:
