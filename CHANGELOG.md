@@ -1,3 +1,10 @@
+# [3.35.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.34.0...v3.35.0) (2021-08-19)
+
+
+### Features
+
+* ddd ([7495695](https://github.com/damianesteban/gke-test-deploy/commit/74956953580ec3d02f6a220c4c42da589333b89a))
+
 # [3.34.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.33.0...v3.34.0) (2021-08-19)
 
 
