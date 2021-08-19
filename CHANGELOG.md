@@ -1,3 +1,10 @@
+# [3.36.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.35.0...v3.36.0) (2021-08-19)
+
+
+### Features
+
+* **build:** add release notes link to deployment ([61acba9](https://github.com/damianesteban/gke-test-deploy/commit/61acba9313bcb01b2dad1027d3321095a4202ae0))
+
 # [3.35.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.34.0...v3.35.0) (2021-08-19)
 
 
