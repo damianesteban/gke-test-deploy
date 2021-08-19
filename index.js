@@ -50,7 +50,9 @@ app.get('/', (req, res) => {
 });
 
 const ff = '4';
+const hh = 'gg';
 console.log(ff);
+console.log(hh);
 console.log('Running on http://localhost:' + PORT, '0.0.0.0');
 
 app.listen(PORT, () => {
