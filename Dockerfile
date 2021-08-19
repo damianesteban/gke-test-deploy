@@ -5,13 +5,10 @@ ENV NODE_ENV="production"
 WORKDIR /app
 
 COPY package.json yarn.lock .yarnrc .yarn ./
-COPY . /app
 
-# The application's directory will be the working directory
-
-# RUN yarn set version berry
-# Install Node.js dependencies defined in '/app/package.json'
 RUN yarn install --frozen-lockfile --no-cache --production
+
+COPY . /app
 
 FROM mhart/alpine-node:14
 ENV NODE_ENV="production"
