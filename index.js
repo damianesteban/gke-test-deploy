@@ -48,6 +48,8 @@ app.get('/', (req, res) => {
   res.send({ data: store.data }).status(200);
 });
 
+const ff = '4';
+console.log(ff);
 console.log('Running on http://localhost:' + PORT, '0.0.0.0');
 
 app.listen(PORT, () => {
