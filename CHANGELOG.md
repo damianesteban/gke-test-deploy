@@ -1,3 +1,10 @@
+# [3.33.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.32.0...v3.33.0) (2021-08-19)
+
+
+### Features
+
+* **docker:** add docker things ([007f21e](https://github.com/damianesteban/gke-test-deploy/commit/007f21e12c19c0ef07cb1fc49841462a14a750e5))
+
 # [3.32.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.31.0...v3.32.0) (2021-08-19)
 
 
