@@ -24,6 +24,12 @@ const doEvenMoreThings = (name) => {
   return compacted;
 }
 
+const doOneFinalThing = (name) => {
+  const xs = [1, 2, 3, 4, 5, name];
+  const chunked = u.chunk(xs, 2);
+  return chunked;
+}
+
 // Constants
 const PORT = process.env.PORT || 3000;
 
@@ -39,12 +45,12 @@ const make = () => {
 }
 
 
-
 app.get('/', (req, res) => {
   const result = doThing('Sally');
   const result2 = doMoreThings('Bally');
   const result3 = doEvenMoreThings('Bally');
-  const compositeResult = [result, result2, result3];
+  const result4 = doOneFinalThing('Cally');
+  const compositeResult = [result, result2, result3, result4];
   store.data = compositeResult;
   console.log(make())
   res.send({ data: store.data }).status(200);
