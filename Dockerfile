@@ -4,8 +4,9 @@ ENV NODE_ENV="production"
 # Copy app's source code to the /app directory
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json pnpm-lock.yaml ./
 
+RUN npx pnpm add -g pnpm
 RUN yarn install --frozen-lockfile --no-cache --production
 
 COPY . /app
