@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
 RUN npx pnpm add -g pnpm
-RUN yarn install --frozen-lockfile --no-cache --production
+RUN pnpm install
 
 COPY . /app
 
