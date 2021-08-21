@@ -42,7 +42,7 @@ app.use("/web", express.static("public"));
 
 app.get("/", (_, res) => {
   const result = doThing("Sally");
-  const result2 = doMoreThings("Bally");
+  const result2 = doMoreThings("Cally");
   const result3 = doEvenMoreThings("Dally");
   const result4 = doOneFinalThing("Gally");
   const compositeResult = [result, result2, result3, result4];
