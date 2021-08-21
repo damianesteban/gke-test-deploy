@@ -10,6 +10,7 @@ const doThing = (name) => {
   return clone;
 };
 
+
 const doMoreThings = (name) => {
   const xs = [1, 2, 3, 4, 5, name];
   const reduction = _.reduce(xs, (acc, x) => acc + x);
