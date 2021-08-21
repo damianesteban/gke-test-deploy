@@ -1,3 +1,18 @@
+# [3.36.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.35.0...v3.36.0) (2021-08-21)
+
+
+### Bug Fixes
+
+* remove pnpm ([c90cee2](https://github.com/damianesteban/gke-test-deploy/commit/c90cee24cde780fb632982d29be1a2063e77a00f))
+
+
+### Features
+
+* add chunk method for no real reason ([84d5730](https://github.com/damianesteban/gke-test-deploy/commit/84d57301e699a3b1f38c7ecb49f24744e8b4e333))
+* add pnpm ([181f1d3](https://github.com/damianesteban/gke-test-deploy/commit/181f1d35d1a459a03cbdc94bf9e961f7d1c3a44b))
+* fix ([245d1b9](https://github.com/damianesteban/gke-test-deploy/commit/245d1b9003fd2b6b04fd80ac1bfff8405a45fbbf))
+* **build:** add release notes link to deployment ([61acba9](https://github.com/damianesteban/gke-test-deploy/commit/61acba9313bcb01b2dad1027d3321095a4202ae0))
+
 # [3.37.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.36.0...v3.37.0) (2021-08-21)
 
 
