@@ -4,6 +4,9 @@ const _ = require("lodash");
 const { store } = require("./db");
 const u = require("underscore");
 
+
+const yy = 'uuu';
+console.log(yy);
 const doThing = (name) => {
   const xs = [1, 2, 3, 4, 5, name];
   const clone = _.cloneDeep(xs);
