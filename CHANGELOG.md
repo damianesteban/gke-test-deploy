@@ -1,3 +1,10 @@
+# [3.37.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.36.0...v3.37.0) (2021-08-22)
+
+
+### Features
+
+* add consolelog ([c3589df](https://github.com/damianesteban/gke-test-deploy/commit/c3589dfea944d338109412e0a5447a0b757da2d8))
+
 # [3.36.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.35.0...v3.36.0) (2021-08-21)
 
 
