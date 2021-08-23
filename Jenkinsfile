@@ -11,7 +11,9 @@ def imageApplicationName = 'webapp'
 pipeline {
 
 
-    agent any
+    agent {
+        kubernetes { yamlFile("./docker-pod.yaml") }
+    }
 
     // nodejs plugin
     tools { nodejs "node" }
