@@ -1,3 +1,10 @@
+# [3.38.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.37.0...v3.38.0) (2021-08-23)
+
+
+### Features
+
+* remove package ([35fa2a9](https://github.com/damianesteban/gke-test-deploy/commit/35fa2a9f75978b3b0074778c7fddac74ee7640c8))
+
 # [3.37.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.36.0...v3.37.0) (2021-08-22)
 
 
