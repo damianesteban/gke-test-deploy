@@ -1,3 +1,10 @@
+# [3.39.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.38.0...v3.39.0) (2021-08-23)
+
+
+### Features
+
+* remove k8s declaration ([75db6be](https://github.com/damianesteban/gke-test-deploy/commit/75db6be14b89800b4a7009d805a8895c2301ef45))
+
 # [3.38.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.37.0...v3.38.0) (2021-08-23)
 
 
