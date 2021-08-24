@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "start": "yarn node index.js",
-    "commit": "git-cz",
+    
     "semantic-release": "semantic-release",
     "test": "jest"
   },
