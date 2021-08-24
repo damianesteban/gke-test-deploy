@@ -2,9 +2,11 @@
 class DataStore {
   #data;
   #isDataSet
+  #moreData;
   
   constructor() {
     this.#data = [{ name: 'Andrew' }, { name: 'Briana' }, { name: 'Cindy' }];
+    this.#moreData = [{ name: 'Drew' }, { name: 'Evan' }, { name: 'Finn' }];
   }
 
   set data(data) {
