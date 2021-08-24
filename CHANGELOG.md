@@ -1,3 +1,10 @@
+# [3.42.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.41.0...v3.42.0) (2021-08-24)
+
+
+### Features
+
+* a feature ([9904599](https://github.com/damianesteban/gke-test-deploy/commit/990459940cafe917223c8444ec13dc9550558869))
+
 # [3.41.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.40.0...v3.41.0) (2021-08-24)
 
 
