@@ -1,6 +1,6 @@
 {
   "name": "test-deploy-app",
-  "version": "3.40.0",
+  "version": "3.41.0",
   "packageManager": "yarn@3.0.0",
   "main": "index.js",
   "author": "Damian Esteban",

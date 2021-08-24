@@ -1,3 +1,10 @@
+# [3.41.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.40.0...v3.41.0) (2021-08-24)
+
+
+### Features
+
+* add a new feature to the database. So nice!!!!!!!!! ([367b0f2](https://github.com/damianesteban/gke-test-deploy/commit/367b0f25dff1a16e5db8792876878a6c2795468c))
+
 # [3.40.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.39.0...v3.40.0) (2021-08-24)
 
 
