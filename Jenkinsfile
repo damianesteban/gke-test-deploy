@@ -6,6 +6,8 @@ def imageTag = null
 def developmentRepository = 'betterptdev'
 def stagingRepository = 'betterptstaging'
 def productionRepository = 'betterptproduction'
+
+// ! TODO: This needs to be an env variable
 def imageApplicationName = 'webapp'
 
 pipeline {
@@ -16,7 +18,7 @@ pipeline {
     tools { nodejs "node" }
 
     environment {
-        // Grabs the 
+        // Grabs the commit hash from the current build
         shortCommit = sh(returnStdout: true, script: "git log -1 --pretty=%H").trim()
         GH_TOKEN = credentials('github-token')
         NPM_TOKEN = credentials('npm-token')
@@ -42,7 +44,8 @@ pipeline {
             }
         }
 
-        stage("When no tag") {
+        // Semantic Release
+        stage("Semantic Release") {
             when {
               expression { 
                 return gitTag == ""
@@ -53,20 +56,6 @@ pipeline {
                     echo "NO TAG FOUND! Running Semantic Release!!"
                     sh 'npx semantic-release --debug'
                 }
-            }
-        }
-
-
-
-        // Runs applicaion tests
-        stage("Run application tests") {
-          when {
-              expression { 
-                return !(gitTag == "")
-              }
-            }
-            steps {
-                sh 'yarn install && yarn test'
             }
         }
 
