@@ -1,3 +1,15 @@
+# [3.44.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.43.0...v3.44.0) (2021-08-31)
+
+
+### Features
+
+* add ([c1d6f93](https://github.com/damianesteban/gke-test-deploy/commit/c1d6f93d71817eafe206e007fa93fe4bf38f4ee7))
+* add test ([da83bf2](https://github.com/damianesteban/gke-test-deploy/commit/da83bf2ac7742f1ed11ec9a97d24dfb7050bc56d))
+* fix ([2505f75](https://github.com/damianesteban/gke-test-deploy/commit/2505f75d109cbea60710f730750fbaa1b45f752e))
+* fix cond ([24dcf9f](https://github.com/damianesteban/gke-test-deploy/commit/24dcf9ff6f1e573e420dc88bdcd70ec3a5954bda))
+* fix issue with confitional ([bc781d9](https://github.com/damianesteban/gke-test-deploy/commit/bc781d93833b2af2ae714f4594c756588f3492f5))
+* tag ([c131fbe](https://github.com/damianesteban/gke-test-deploy/commit/c131fbe1c771664ad7a63a3dadfed446f8e2ef4b))
+
 # [3.43.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.42.2...v3.43.0) (2021-08-31)
 
 
