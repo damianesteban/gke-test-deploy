@@ -58,6 +58,11 @@ pipeline {
 
         // Runs applicaion tests
         stage("Run application tests") {
+          when {
+              expression { 
+                return !(gitTag == "")
+              }
+            }
             steps {
                 sh 'yarn install && yarn test'
             }
