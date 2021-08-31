@@ -50,10 +50,12 @@ pipeline {
             }
             steps {
                 script {
-                    echo "NO TAG FOUND!!!!!!!"
+                    echo "NO TAG FOUND! Running Semantic Release!!"
+                    sh 'npx semantic-release --debug'
                 }
             }
         }
+
 
 
         // Runs applicaion tests
@@ -70,6 +72,11 @@ pipeline {
 
         // Sets the image tag based on the git tag and git commit hash
         stage("Tag the image") {
+          when {
+              expression { 
+                return !(gitTag == "")
+              }
+            }
             steps {
                 script {
                     if (gitTag != "") {
@@ -85,6 +92,11 @@ pipeline {
 
         // Builds the docker image
         stage("Build image") {
+           when {
+              expression { 
+                return !(gitTag == "")
+              }
+            }
             steps {
                 script {
                     dockerImage = docker.build "${developmentRepository}/${imageApplicationName}:${imageTag}"
@@ -93,6 +105,11 @@ pipeline {
         }
 
         stage('Application Testing') {
+            when {
+              expression { 
+                return !(gitTag == "")
+              }
+            }
             steps {
                 script {
                     dockerImage.inside {
@@ -105,6 +122,11 @@ pipeline {
         // ! NOTE: Example of Image Verification
         // ! NOTE: goss and dgoss need to installed on the host or in a container.
         stage('Image Verification') {
+            when {
+              expression { 
+                return !(gitTag == "")
+              }
+            }
             steps {
                 script {
                     sh(returnStdout: true, script: "dgoss run -p 5000:5000 ${developmentRepository}/${imageApplicationName}:${imageTag}")  
@@ -114,7 +136,12 @@ pipeline {
 
         // Pushes the image to the registry twice - once with the latest tag and once with the image tag
         // This should be pushed to a different registry based on the environment - dev, staging, pr production.
-        stage("Push image to registry") {  
+        stage("Push image to registry") { 
+            when {
+              expression { 
+                return !(gitTag == "")
+              }
+            } 
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub') {
@@ -124,18 +151,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Push to Github') {
-            steps {
-                script {
-                    echo 'Running Semantic Release!'
-                    sh 'npx semantic-release --debug'
-                }
-            }
-        }
-
-
-
 
         // ! NOTE: Deployment is with Helm, this is just a placeholder
         // stage('Deploy') {
