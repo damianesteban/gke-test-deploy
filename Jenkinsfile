@@ -36,7 +36,6 @@ pipeline {
             steps {
                 checkout scm
                 script {
-                    sh 'git checkout master'
                     gitTag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                     echo "GIT TAG: ${gitTag}"
                 }
