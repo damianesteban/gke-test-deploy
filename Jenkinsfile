@@ -70,7 +70,6 @@ pipeline {
                 script {
                     dockerImage = docker.build "${developmentRepository}/${imageApplicationName}:${imageTag}"
                 }
-                
             }
         }
 
@@ -95,6 +94,7 @@ pipeline {
         }
 
         // Pushes the image to the registry twice - once with the latest tag and once with the image tag
+        // This should be pushed to a different registry based on the environment - dev, staging, pr production.
         stage("Push image to registry") {  
             steps {
                 script {
