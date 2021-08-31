@@ -106,6 +106,15 @@ pipeline {
             }
         }
 
+        stage('Push to Github') {
+            steps {
+                script {
+                    sh 'npx semantic-release'
+                }
+            }
+        }
+
+
         // ! NOTE: Deployment is with Helm, this is just a placeholder
         // stage('Deploy') {
         //     steps {
