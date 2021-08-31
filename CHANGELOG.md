@@ -1,3 +1,24 @@
+# [3.43.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.42.2...v3.43.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* fix branch name ([1b9fe92](https://github.com/damianesteban/gke-test-deploy/commit/1b9fe92b02195055179fbded1f9a97a18c1d87be))
+* test fix ([88ad033](https://github.com/damianesteban/gke-test-deploy/commit/88ad033b0f370a6ad1be289d3d8d24794fa1dc15))
+
+
+### Features
+
+* add ([a418ba6](https://github.com/damianesteban/gke-test-deploy/commit/a418ba6c27b0dc46b451a13062f648d3826ae8cc))
+* add ([5c67fa3](https://github.com/damianesteban/gke-test-deploy/commit/5c67fa351a6a4957eeaa91f6f320e411d6ae3cb3))
+* add debug ([a97772b](https://github.com/damianesteban/gke-test-deploy/commit/a97772bd834a1b18f1d4edd6d9da42abe1884021))
+* add it ([1ebbd9d](https://github.com/damianesteban/gke-test-deploy/commit/1ebbd9ddbcc1b885bfea52c5791f09dbeaa96395))
+* add new ([584bfbb](https://github.com/damianesteban/gke-test-deploy/commit/584bfbb8341a14ca69fa43a73810b763e998c505))
+* add sem rel to jenkins file ([c36a870](https://github.com/damianesteban/gke-test-deploy/commit/c36a870fc985d1b244e4803e49da6b63ceec3f04))
+* short one' ([f135f84](https://github.com/damianesteban/gke-test-deploy/commit/f135f844e7511fbcd3c859e065d72be11095b78d))
+* test ([c73b0ca](https://github.com/damianesteban/gke-test-deploy/commit/c73b0ca213badfdd0494eabd908919055983f430))
+* **add new one:** add new one ([50ed357](https://github.com/damianesteban/gke-test-deploy/commit/50ed357d1a7f2e744ea03a951b18abb63bc75f23))
+
 ## [3.42.2](https://github.com/damianesteban/gke-test-deploy/compare/v3.42.1...v3.42.2) (2021-08-31)
 
 
