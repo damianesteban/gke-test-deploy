@@ -109,6 +109,7 @@ pipeline {
         stage('Push to Github') {
             steps {
                 script {
+                    echo 'Running Semantic Release!'
                     sh 'npx semantic-release'
                 }
             }
