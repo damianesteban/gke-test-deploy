@@ -1,3 +1,10 @@
+# [3.46.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.45.0...v3.46.0) (2021-08-31)
+
+
+### Features
+
+* add cond third ([cb83de9](https://github.com/damianesteban/gke-test-deploy/commit/cb83de95f46f472e9c44af3a85771defc4f2bb6e))
+
 # [3.45.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.44.0...v3.45.0) (2021-08-31)
 
 
