@@ -1,3 +1,10 @@
+## [3.42.1](https://github.com/damianesteban/gke-test-deploy/compare/v3.42.0...v3.42.1) (2021-08-31)
+
+
+### Bug Fixes
+
+* add k8s folder ([956c1d4](https://github.com/damianesteban/gke-test-deploy/commit/956c1d48b8b09b3da59ef2b80a8e0e4417b52e47))
+
 # [3.42.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.41.0...v3.42.0) (2021-08-24)
 
 
