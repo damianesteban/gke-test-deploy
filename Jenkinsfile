@@ -45,7 +45,7 @@ pipeline {
         stage("When no tag") {
             when {
               expression { 
-                ${gitTag} == null
+                return gitTag == null
               }
             }
             steps {
