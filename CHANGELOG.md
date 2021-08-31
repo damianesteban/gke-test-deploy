@@ -1,3 +1,10 @@
+## [3.42.2](https://github.com/damianesteban/gke-test-deploy/compare/v3.42.1...v3.42.2) (2021-08-31)
+
+
+### Bug Fixes
+
+* recert file ([891c41a](https://github.com/damianesteban/gke-test-deploy/commit/891c41a985fc940bc44f4d63b24254ea83972947))
+
 ## [3.42.1](https://github.com/damianesteban/gke-test-deploy/compare/v3.42.0...v3.42.1) (2021-08-31)
 
 
