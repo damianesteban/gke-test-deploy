@@ -42,6 +42,17 @@ pipeline {
             }
         }
 
+        stage("When no tag") {
+            when(expression: "${gitTag} == null") {
+                steps {
+                    script {
+                        echo "NO TAG FOUND!!!!!!!"
+                    }
+
+                }
+            }
+        }
+
         // Runs applicaion tests
         stage("Run application tests") {
             steps {
