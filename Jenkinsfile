@@ -110,7 +110,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running Semantic Release!'
-                    sh 'npx semantic-release'
+                    sh 'npx semantic-release --debug'
                 }
             }
         }
