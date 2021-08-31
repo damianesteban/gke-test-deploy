@@ -44,6 +44,7 @@ const app = express();
 
 app.use("/web", express.static("public"));
 
+
 app.get("/", (_, res) => {
   const result = doThing("Sally");
   const result2 = doMoreThings("Cally");
