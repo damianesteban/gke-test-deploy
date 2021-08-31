@@ -36,6 +36,7 @@ pipeline {
             steps {
                 checkout scm
                 script {
+                    sh 'git checkout master'
                     gitTag = sh(returnStdout: true, script: "git tag --contains | head -1").trim()
                     echo "GIT TAG: ${gitTag}"
                 }
@@ -110,7 +111,6 @@ pipeline {
             steps {
                 script {
                     echo 'Running Semantic Release!'
-                    sh 'git checkout master'
                     sh 'npx semantic-release --debug'
                 }
             }
