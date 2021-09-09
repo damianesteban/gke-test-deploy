@@ -32,12 +32,59 @@ apiVersion: v1
 kind: Service
 metadata:
   name: webapp
+  annotations:
+        a8r.io/description: "The webapp service"
+        a8r.io/owner: "James Dean"
+        a8r.io/chat: "#deanrules"
+        a8r.io/bugs: "https://github.com/datawire/quote/issues"
+        a8r.io/documentation: "https://github.com/datawire/quote/blob/master/README.md"
+        a8r.io/repository: "https://github.com/datawire/quote"
+        a8r.io/support: "http://a8r.io/Slack"
+        a8r.io/runbook: "https://github.com/datawire/quote/blob/master/README.md"
+        a8r.io/incidents: "https://github.com/datawire/quote/issues"
+        a8r.io/dependencies: "None"
 spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 5000
   selector:
     app: webapp
-  ports:
-    - port: 80
-      targetPort: 5000
-  type: ClusterIP
-
-
+---
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
+metadata:
+  name: webapp-backend
+spec:
+  hostname: "*"
+  prefix: /webapp/
+  service: webapp
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: webapp
+# spec:
+#   selector:
+#     app: webapp
+#   ports:
+#     - port: 80
+#       targetPort: 5000
+#   type: ClusterIP
+# ---
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: ingress-resource
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+#     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+# spec:
+#   rules:
+#   - host: 34.74.23.31.nip.io
+#     http:
+#       paths:
+#       - backend:
+#           serviceName: webapp
+#           servicePort: 5000
+#         path: /

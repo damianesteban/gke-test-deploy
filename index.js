@@ -5,14 +5,12 @@ const { store } = require("./db");
 const u = require("underscore");
 
 
-const yy = 'uuu';
-console.log(yy);
+// Random test functions to use lodash
 const doThing = (name) => {
   const xs = [1, 2, 3, 4, 5, name];
   const clone = _.cloneDeep(xs);
   return clone;
 };
-
 
 const doMoreThings = (name) => {
   const xs = [1, 2, 3, 4, 5, name];
@@ -44,8 +42,6 @@ const app = express();
 
 app.use("/web", express.static("public"));
 
-
-
 app.get("/", (_, res) => {
   const result = doThing("Sally");
   const result2 = doMoreThings("Cally");
@@ -62,3 +58,4 @@ app.get("/", (_, res) => {
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });
+

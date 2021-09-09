@@ -1,0 +1,40 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: damian.esteban@gmail.com
+
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-prod
+
+    # ACME DNS-01 provider configurations
+    solvers:
+
+    # We only use cloudflare to solve challenges for example.org.
+    # Alternative options such as 'matchLabels' and 'dnsZones' can be specified
+    # as part of a solver's selector too.
+    - selector: {}
+      dns01:
+        cloudflare:
+          email: damian.esteban@gmail.com
+          # 
+          apiKeySecretRef:
+            name: cloudflare-api-token-secret
+            key: api-key
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: k8s.reactive.uno
+spec:
+  secretName: ambassador-certs
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: k8s.reactive.uno
+  dnsNames:
+  - k8s.reactive.uno
