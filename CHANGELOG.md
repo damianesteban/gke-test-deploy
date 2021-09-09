@@ -1,3 +1,10 @@
+# [3.47.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.46.0...v3.47.0) (2021-09-09)
+
+
+### Features
+
+* add several k8s manifests ([0debddb](https://github.com/damianesteban/gke-test-deploy/commit/0debddb48ec46216d0cb2c2000a6ff730a63898c))
+
 # [3.46.0](https://github.com/damianesteban/gke-test-deploy/compare/v3.45.0...v3.46.0) (2021-08-31)
 
 
