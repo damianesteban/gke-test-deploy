@@ -26,14 +26,13 @@
     - Tags the image
     - Runs Image Verification
     - Pushes Image to AWS ECR
-    - Manual Approval Step is created
-  - Manual Approval
+    - Manual Approval Step is created (phase 2)
+  - Manual Approval (phase2)
     - Yes/No
     - Helm version (from image tag) is pushed to repository.
     - Deployment with Helm
   - Jenkins Post-Deploy Pipeline
     - Post-deploy Actions
-    - On successful Deploy, submits a PR to the git branch associated with the next environment. (i.e. to staging)
   - Start Over
 
  This is a test project for GKE, Jenkins, and friends.
